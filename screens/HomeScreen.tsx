@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 
 import CONSTANTS from '../variables/constants'
@@ -80,10 +80,9 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={mapRegion}
-      />
+      <MapView style={styles.map} initialRegion={mapRegion}>
+        <Marker coordinate={mapRegion} title="Marker" />
+      </MapView>
       <SafeAreaView style={styles.header}>
         <SearchBar
           addressess={addressess}
