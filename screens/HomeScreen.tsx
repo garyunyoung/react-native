@@ -64,22 +64,29 @@ export default function HomeScreen() {
         </View>
         <FlatList
           data={MOCK_DATA}
+          keyExtractor={(item) => `${item.id}`}
           renderItem={({ item }) => (
-            <View style={styles.listItem}>
-              <Text style={styles.listItemDelete}>X</Text>
-              <Text style={styles.listItemNumber}>
-                {item.id}
-              </Text>
-              <View>
-                <Text>{item.streetAddress}</Text>
-                <Text>{item.city}</Text>
-              </View>
-            </View>
+            <ListItem item={item} />
           )}
         />
       </View>
       <ExpoStatusBar style="auto" />
     </SafeAreaView>
+  )
+}
+
+function ListItem(props: any) {
+  return (
+    <View style={styles.listItem}>
+      <Text style={styles.listItemDelete}>X</Text>
+      <Text style={styles.listItemNumber}>
+        {props.item.id}
+      </Text>
+      <View>
+        <Text>{props.item.streetAddress}</Text>
+        <Text>{props.item.city}</Text>
+      </View>
+    </View>
   )
 }
 
