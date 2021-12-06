@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 
 import CONSTANTS from '../variables/constants'
@@ -13,6 +13,7 @@ import {
   FlatList,
   TextInput,
   StatusBar
+  // TouchableOpacity
 } from 'react-native'
 
 const MOCK_DATA = [
@@ -69,11 +70,16 @@ const MOCK_DATA = [
 ]
 
 export default function HomeScreen() {
+  const [addressess, setAddresses] = useState([])
+
   return (
     <View style={styles.container}>
       <View style={styles.map}></View>
       <SafeAreaView style={styles.header}>
-        <SearchBar />
+        <SearchBar
+          addressess={addressess}
+          setAddresses={setAddresses}
+        />
       </SafeAreaView>
       <View>
         <View style={styles.heading}>
@@ -82,8 +88,7 @@ export default function HomeScreen() {
           </Text>
         </View>
         <FlatList
-          data={MOCK_DATA}
-          keyExtractor={(item) => `${item.id}`}
+          data={addressess}
           renderItem={({ item }) => (
             <ListItem item={item} />
           )}
@@ -94,14 +99,43 @@ export default function HomeScreen() {
   )
 }
 
-function SearchBar() {
+function SearchBar(props: any) {
+  const [isTextInputFocused, setIsTextInputFocused] =
+    useState(false)
+  const [textInput, setTextInput] = useState('')
+
+  const addAddressToList = ({ nativeEvent: { text } }) => {
+    props.setAddresses([...props.addressess, text])
+    setTextInput('')
+  }
+
+  const clearTextInput = () => {
+    setTextInput('')
+  }
+
   return (
     <View style={styles.searchBar}>
-      <Text style={styles.searchBarBack}>Back</Text>
+      <Text style={styles.searchBarBack}>
+        {isTextInputFocused ? 'Back' : 'Search'}
+      </Text>
       <View style={styles.searchBarTextInputWrapper}>
-        <TextInput style={styles.searchBarTextInput} />
+        <TextInput
+          style={styles.searchBarTextInput}
+          placeholder="Search here"
+          value={textInput}
+          onFocus={() => setIsTextInputFocused(true)}
+          onChangeText={setTextInput}
+          onSubmitEditing={addAddressToList}
+        />
       </View>
-      <Text style={styles.searchBarDeleteTextInput}>X</Text>
+      {textInput !== '' ? (
+        <Text
+          style={styles.searchBarDeleteTextInput}
+          onPress={clearTextInput}
+        >
+          X
+        </Text>
+      ) : null}
     </View>
   )
 }
