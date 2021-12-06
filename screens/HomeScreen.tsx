@@ -126,6 +126,7 @@ function SearchBar(props: any) {
           onFocus={() => setIsTextInputFocused(true)}
           onChangeText={setTextInput}
           onSubmitEditing={addAddressToList}
+          autoCorrect={false}
         />
       </View>
       {textInput !== '' ? (
