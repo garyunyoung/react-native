@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import MapView from 'react-native-maps'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 
 import CONSTANTS from '../variables/constants'
@@ -13,7 +14,6 @@ import {
   FlatList,
   TextInput,
   StatusBar
-  // TouchableOpacity
 } from 'react-native'
 
 const MOCK_DATA = [
@@ -71,10 +71,19 @@ const MOCK_DATA = [
 
 export default function HomeScreen() {
   const [addressess, setAddresses] = useState([])
+  const [mapRegion, setMapRegion] = useState({
+    latitude: -36.848461,
+    longitude: 174.763336,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  })
 
   return (
     <View style={styles.container}>
-      <View style={styles.map}></View>
+      <MapView
+        style={styles.map}
+        initialRegion={mapRegion}
+      />
       <SafeAreaView style={styles.header}>
         <SearchBar
           addressess={addressess}
@@ -210,6 +219,7 @@ const styles = StyleSheet.create({
 
   map: {
     height: height * 0.5,
+    width: width,
     backgroundColor: 'lightblue'
   },
 
