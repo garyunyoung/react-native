@@ -10,14 +10,73 @@ import {
   SafeAreaView,
   View,
   Text,
+  FlatList,
   StatusBar
 } from 'react-native'
+
+const MOCK_DATA = [
+  {
+    id: 1,
+    streetAddress: '205 Great South Road',
+    city: 'Auckland'
+  },
+  {
+    id: 2,
+    streetAddress: '205 Great South Road',
+    city: 'Auckland'
+  },
+  {
+    id: 3,
+    streetAddress: '205 Great South Road',
+    city: 'Auckland'
+  },
+  {
+    id: 4,
+    streetAddress: '205 Great South Road',
+    city: 'Auckland'
+  },
+  {
+    id: 5,
+    streetAddress: '205 Great South Road',
+    city: 'Auckland'
+  },
+  {
+    id: 6,
+    streetAddress: '205 Great South Road',
+    city: 'Auckland'
+  },
+  {
+    id: 7,
+    streetAddress: '205 Great South Road',
+    city: 'Auckland'
+  }
+]
 
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.map}>
-        <Text>Map</Text>
+      <View style={styles.map}></View>
+      <View>
+        <View style={styles.heading}>
+          <Text style={styles.headingText}>
+            Destinations
+          </Text>
+        </View>
+        <FlatList
+          data={MOCK_DATA}
+          renderItem={({ item }) => (
+            <View style={styles.listItem}>
+              <Text style={styles.listItemDelete}>X</Text>
+              <Text style={styles.listItemNumber}>
+                {item.id}
+              </Text>
+              <View>
+                <Text>{item.streetAddress}</Text>
+                <Text>{item.city}</Text>
+              </View>
+            </View>
+          )}
+        />
       </View>
       <ExpoStatusBar style="auto" />
     </SafeAreaView>
@@ -33,8 +92,40 @@ const styles = StyleSheet.create({
         ? StatusBar.currentHeight
         : 0
   },
+
   map: {
     height: height * 0.5,
     backgroundColor: 'lightblue'
+  },
+
+  heading: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+
+    borderBottomWidth: 2,
+    borderBottomColor: 'black'
+  },
+
+  headingText: {
+    fontSize: 24
+  },
+
+  listItem: {
+    flexDirection: 'row',
+
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+
+    borderBottomWidth: 1,
+    borderBottomColor: 'black'
+  },
+
+  listItemDelete: {
+    marginRight: 16,
+    color: 'red'
+  },
+
+  listItemNumber: {
+    marginRight: 16
   }
 })
