@@ -82,7 +82,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <MapView style={styles.map} initialRegion={mapRegion}>
-        <Marker coordinate={mapRegion} title="Marker" />
+        {/* <Marker coordinate={mapRegion} title="Marker" /> */}
       </MapView>
       <SafeAreaView style={styles.header}>
         <SearchBar
