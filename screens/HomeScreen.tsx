@@ -91,9 +91,11 @@ function Directions(props: any) {
       waypoints={waypoints}
       destination={origin}
       apikey={CONSTANTS.GOOGLE_PLACES_API_KEY}
+      optimizeWaypoints={true}
       onReady={(result) => {
         console.log(`Distance: ${result.distance} km`)
         console.log(`Duration: ${result.duration} min.`)
+        console.log(`Waypoint: ${result.waypointOrder}.`)
       }}
     />
   )
