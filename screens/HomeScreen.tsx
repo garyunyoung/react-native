@@ -9,7 +9,7 @@ import Destinations from '../components/Destinations'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function HomeScreen() {
-  const aucklandMapRegion = {
+  const AUCKLAND_MAP_REGION = {
     latitude: -36.848461,
     longitude: 174.763336,
     latitudeDelta: 0.0922,
@@ -18,7 +18,7 @@ export default function HomeScreen() {
 
   const [locations, setLocations] = useState([])
   const [mapRegion, setMapRegion] = useState(
-    aucklandMapRegion
+    AUCKLAND_MAP_REGION
   )
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)

@@ -8,28 +8,29 @@ import MapViewDirections from 'react-native-maps-directions'
 import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
-export default function Map(props: any) {
+export default function Map({
+  mapRegion,
+  isDirectionsVisible,
+  locationsCoordinates,
+  locations
+}) {
   return (
     <MapView
       style={styles.map}
-      initialRegion={props.mapRegion}
+      initialRegion={mapRegion}
       provider={PROVIDER_GOOGLE}
     >
-      {props.isDirectionsVisible ? (
-        <MapDirections
-          coordinates={props.locationsCoordinates}
-        />
+      {isDirectionsVisible ? (
+        <MapDirections coordinates={locationsCoordinates} />
       ) : null}
 
-      {props.locations.map(
-        (address: any, index: number) => (
-          <Marker
-            key={index}
-            coordinate={address.coordinates}
-            title={address.streetAddress}
-          />
-        )
-      )}
+      {locations.map((address: any, index: number) => (
+        <Marker
+          key={index}
+          coordinate={address.coordinates}
+          title={address.streetAddress}
+        />
+      ))}
     </MapView>
   )
 }

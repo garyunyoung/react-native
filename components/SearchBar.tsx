@@ -5,15 +5,18 @@ import { SafeAreaView, View, Alert } from 'react-native'
 import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
-export default function SearchBar(props: any) {
+export default function SearchBar({
+  locations,
+  setLocations,
+  setMapRegion
+}) {
   function addNewLocation(newLocation: any) {
     const locationLimitReached =
-      props.locations.length >=
-      CONSTANTS.LOCATIONS_LIMIT_MAX
+      locations.length >= CONSTANTS.LOCATIONS_LIMIT_MAX
 
     const locationAlreadyExists =
-      props.locations !== [] &&
-      props.locations.some(
+      locations !== [] &&
+      locations.some(
         (location: any) => location.key === newLocation.key
       )
 
@@ -34,10 +37,7 @@ export default function SearchBar(props: any) {
         )
         break
       default:
-        props.setLocations([
-          ...props.locations,
-          newLocation
-        ])
+        setLocations([...locations, newLocation])
         break
     }
   }
@@ -75,7 +75,7 @@ export default function SearchBar(props: any) {
       longitudeDelta: 0.0421
     }
 
-    props.setMapRegion(newMapRegion)
+    setMapRegion(newMapRegion)
     addNewLocation(newLocation)
   }
 
