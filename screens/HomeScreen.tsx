@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-import MapView, {
-  PROVIDER_GOOGLE,
-  Marker
-} from 'react-native-maps'
+
 import MapViewDirections from 'react-native-maps-directions'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
@@ -14,6 +11,8 @@ import {
   FlatList,
   Alert
 } from 'react-native'
+
+import Map from '../components/Map'
 
 import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
@@ -35,23 +34,12 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={mapRegion}
-        provider={PROVIDER_GOOGLE}
-      >
-        {showDirections ? (
-          <Directions directions={directions} />
-        ) : null}
-
-        {addressess.map((address, index) => (
-          <Marker
-            key={index}
-            coordinate={address.coordinates}
-            title={address.streetAddress}
-          />
-        ))}
-      </MapView>
+      <Map
+        mapRegion={mapRegion}
+        showDirections={showDirections}
+        directions={directions}
+        addressess={addressess}
+      />
       <SafeAreaView style={styles.header}>
         <SearchBar
           addressess={addressess}
