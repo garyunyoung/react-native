@@ -113,7 +113,8 @@ function SearchBar(props: any) {
           }
           query={{
             key: CONSTANTS.GOOGLE_PLACES_API_KEY,
-            language: 'en'
+            language: 'en',
+            components: 'country:nz'
           }}
         />
       </View>
