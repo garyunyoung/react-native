@@ -26,22 +26,14 @@ export const styles = StyleSheet.create({
   },
 
   searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-
-    backgroundColor: 'white',
-
-    paddingHorizontal: 16,
-
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: 'lightgray',
-
-    position: 'relative'
-  },
-
-  searchBarTextInputWrapper: {
-    flex: 1
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // backgroundColor: 'white',
+    // paddingHorizontal: 16,
+    // borderRadius: 50,
+    // borderWidth: 1,
+    // borderColor: 'lightgray',
+    // position: 'relative'
   },
 
   map: {

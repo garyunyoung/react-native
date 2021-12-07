@@ -104,20 +104,18 @@ function SearchBar(props: any) {
 
   return (
     <View style={styles.searchBar}>
-      <View style={styles.searchBarTextInputWrapper}>
-        <GooglePlacesAutocomplete
-          placeholder="Search"
-          fetchDetails={true}
-          onPress={(_data, details = null) =>
-            handleOnPress(details)
-          }
-          query={{
-            key: CONSTANTS.GOOGLE_PLACES_API_KEY,
-            language: 'en',
-            components: 'country:nz'
-          }}
-        />
-      </View>
+      <GooglePlacesAutocomplete
+        placeholder="Search"
+        fetchDetails={true}
+        onPress={(_data, details = null) =>
+          handleOnPress(details)
+        }
+        query={{
+          key: CONSTANTS.GOOGLE_PLACES_API_KEY,
+          language: 'en',
+          components: 'country:nz'
+        }}
+      />
     </View>
   )
 }
