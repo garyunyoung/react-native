@@ -6,19 +6,13 @@ import Map from '../components/Map'
 import SearchBar from '../components/SearchBar'
 import Destinations from '../components/Destinations'
 
+import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function HomeScreen() {
-  const AUCKLAND_MAP_REGION = {
-    latitude: -36.848461,
-    longitude: 174.763336,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421
-  }
-
   const [locations, setLocations] = useState([])
   const [mapRegion, setMapRegion] = useState(
-    AUCKLAND_MAP_REGION
+    CONSTANTS.AUCKLAND_MAP_REGION
   )
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
@@ -28,7 +22,6 @@ export default function HomeScreen() {
       <Map
         locations={locations}
         mapRegion={mapRegion}
-        // locationsCoordinates={locationsCoordinates}
         isDirectionsVisible={isDirectionsVisible}
       />
       <SearchBar
