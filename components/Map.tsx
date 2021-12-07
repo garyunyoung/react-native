@@ -17,7 +17,7 @@ export default function Map(props: any) {
     >
       {props.isDirectionsVisible ? (
         <MapDirections
-          locationsCoordinates={props.locationsCoordinates}
+          coordinates={props.locationsCoordinates}
         />
       ) : null}
 
@@ -34,20 +34,24 @@ export default function Map(props: any) {
   )
 }
 
-function MapDirections(props: any) {
-  const origin = props.locationsCoordinates[0]
-  const waypoints = props.locationsCoordinates.slice(1, -1)
+function MapDirections({ coordinates }) {
+  // TO DO: Test conditionals
+  const origin = coordinates[0]
+  const destination =
+    coordinates.length === 2 ? coordinates[1] : origin
+
+  const waypoints = coordinates.slice(1, -1)
 
   return (
     <MapViewDirections
       origin={origin}
       waypoints={waypoints}
-      destination={origin}
+      destination={destination}
       apikey={CONSTANTS.GOOGLE_PLACES_API_KEY}
       // optimizeWaypoints={true}
-      onReady={(result) => {
-        console.log(`Distance: ${result.distance} km`)
-        console.log(`Duration: ${result.duration} min.`)
+      onReady={({ distance, duration }) => {
+        console.log(`Distance: ${distance} km`)
+        console.log(`Duration: ${duration} min.`)
         // console.log(`Waypoint: ${result.waypointOrder}.`)
       }}
     />

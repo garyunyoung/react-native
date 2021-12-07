@@ -42,17 +42,6 @@ export default function SearchBar(props: any) {
     }
   }
 
-  function getAddressComponentValue(
-    details: any,
-    field: string
-  ) {
-    for (let addressComponent of details?.address_components) {
-      if (addressComponent.types.includes(field)) {
-        return addressComponent.long_name
-      }
-    }
-  }
-
   function handleOnPress(details: any) {
     let key = details?.place_id
     let streetNumber = getAddressComponentValue(
@@ -88,6 +77,17 @@ export default function SearchBar(props: any) {
 
     props.setMapRegion(newMapRegion)
     addNewLocation(newLocation)
+  }
+
+  function getAddressComponentValue(
+    details: any,
+    field: string
+  ) {
+    for (let addressComponent of details?.address_components) {
+      if (addressComponent.types.includes(field)) {
+        return addressComponent.long_name
+      }
+    }
   }
 
   return (
