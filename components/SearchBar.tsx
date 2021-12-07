@@ -60,7 +60,7 @@ export default function SearchBar({
 
     const newLocation = {
       key: key,
-      streetAddress: `${streetNumber} ${route}`,
+      address: `${streetNumber} ${route}`,
       city: `${sublocality} ${locality}`,
       coordinates: {
         latitude: details?.geometry.location.lat,

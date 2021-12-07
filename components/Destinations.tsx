@@ -10,16 +10,16 @@ export default function Destinations({
   isDirectionsVisible,
   setIsDirectionsVisible
 }) {
+  const needsMoreLocations =
+    locations.length < CONSTANTS.LOCATIONS_LIMIT_MIN
+
   return (
     <View>
       <View style={styles.heading}>
         <Text style={styles.headingText}>Destinations</Text>
         <Text
           onPress={() => {
-            if (
-              locations.length <=
-              CONSTANTS.LOCATIONS_LIMIT_MIN
-            ) {
+            if (needsMoreLocations) {
               Alert.alert(
                 'Hello',
                 `'You need at least ${CONSTANTS.LOCATIONS_LIMIT_MIN} locations, please add another location'`,
@@ -39,9 +39,9 @@ export default function Destinations({
         data={locations}
         renderItem={({ item, index }) => (
           <DestinationListItem
-            item={item}
+            location={item}
             index={index}
-            locations={locations}
+            existingLocations={locations}
             setLocations={setLocations}
           />
         )}
@@ -51,14 +51,15 @@ export default function Destinations({
 }
 
 function DestinationListItem({
-  locations,
+  existingLocations,
   setLocations,
-  item,
+  location,
   index
 }) {
-  function removeLocation(addressKey: any) {
-    let newlocations = locations.filter(
-      (address: any) => address.key !== addressKey
+  function removeLocation(locationKey: any) {
+    let newlocations = existingLocations.filter(
+      (existingLocation: any) =>
+        existingLocation.key !== locationKey
     )
 
     setLocations(newlocations)
@@ -68,14 +69,14 @@ function DestinationListItem({
     <View style={styles.listItem}>
       <Text
         style={styles.listItemDelete}
-        onPress={() => removeLocation(item.key)}
+        onPress={() => removeLocation(location.key)}
       >
         X
       </Text>
       <Text style={styles.listItemNumber}>{index + 1}</Text>
       <View>
-        <Text>{item.streetAddress}</Text>
-        <Text>{item.city}</Text>
+        <Text>{location.address}</Text>
+        <Text>{location.city}</Text>
       </View>
     </View>
   )

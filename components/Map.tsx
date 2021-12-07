@@ -28,7 +28,7 @@ export default function Map({
         <Marker
           key={index}
           coordinate={address.coordinates}
-          title={address.streetAddress}
+          title={address.address}
         />
       ))}
     </MapView>
