@@ -1,11 +1,12 @@
 import React from 'react'
 import { View, Text, FlatList, Alert } from 'react-native'
+
+import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function Destinations({
   locations,
   setLocations,
-  locationsCoordinates,
   isDirectionsVisible,
   setIsDirectionsVisible
 }) {
@@ -15,10 +16,13 @@ export default function Destinations({
         <Text style={styles.headingText}>Destinations</Text>
         <Text
           onPress={() => {
-            if (locationsCoordinates.length <= 1) {
+            if (
+              locations.length <=
+              CONSTANTS.LOCATIONS_LIMIT_MIN
+            ) {
               Alert.alert(
                 'Hello',
-                'You need at least two addresses, please add another address',
+                `'You need at least ${CONSTANTS.LOCATIONS_LIMIT_MIN} locations, please add another location'`,
                 [{ text: 'OK' }]
               )
             } else {
