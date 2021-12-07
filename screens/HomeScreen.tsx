@@ -17,59 +17,6 @@ import {
   StatusBar
 } from 'react-native'
 
-const MOCK_DATA = [
-  {
-    id: 1,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 2,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 3,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 4,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 5,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 6,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 7,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 8,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 9,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  },
-  {
-    id: 10,
-    streetAddress: '205 Great South Road',
-    city: 'Auckland'
-  }
-]
-
 export default function HomeScreen() {
   const [addressess, setAddresses] = useState([])
   const [mapRegion, setMapRegion] = useState({
@@ -82,12 +29,13 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <MapView style={styles.map} initialRegion={mapRegion}>
-        {/* <Marker coordinate={mapRegion} title="Marker" /> */}
+        <Marker coordinate={mapRegion} title="Marker" />
       </MapView>
       <SafeAreaView style={styles.header}>
         <SearchBar
           addressess={addressess}
           setAddresses={setAddresses}
+          setMapRegion={setMapRegion}
         />
       </SafeAreaView>
 
@@ -114,9 +62,19 @@ function SearchBar(props: any) {
     useState(false)
   const [textInput, setTextInput] = useState('')
 
-  const addAddressToList = ({ nativeEvent: { text } }) => {
-    props.setAddresses([...props.addressess, text])
-    setTextInput('')
+  function addAddressToList(address: any) {
+    props.setAddresses([...props.addressess, address])
+  }
+
+  function getAddressComponentValue(
+    details: any,
+    component: string
+  ) {
+    for (let addressComponent of details?.address_components) {
+      if (addressComponent.types.includes(component)) {
+        return addressComponent.short_name
+      }
+    }
   }
 
   return (
@@ -138,22 +96,39 @@ function SearchBar(props: any) {
           placeholder="Search"
           fetchDetails={true}
           onPress={(_data, details = null) => {
-            console.log(
-              details?.address_components.map(
-                (component) =>
-                  component.short_name +
-                  ' ' +
-                  component.types
-              )
+            let key = details?.place_id
+            let streetNumber = getAddressComponentValue(
+              details,
+              'street_number'
             )
-            console.log(
-              'lat:',
-              details?.geometry.location.lat
+            let route = getAddressComponentValue(
+              details,
+              'route'
             )
-            console.log(
-              'long:',
-              details?.geometry.location.lng
+            let sublocality = getAddressComponentValue(
+              details,
+              'sublocality'
             )
+            let locality = getAddressComponentValue(
+              details,
+              'locality'
+            )
+
+            const address = {
+              key: key,
+              streetAddress: `${streetNumber} ${route}`,
+              city: `${sublocality} ${locality}`
+            }
+
+            const region = {
+              latitude: details?.geometry.location.lat,
+              longitude: details?.geometry.location.lng,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
+            }
+
+            props.setMapRegion(region)
+            addAddressToList(address)
           }}
           query={{
             key: CONSTANTS.GOOGLE_PLACES_API_KEY,
