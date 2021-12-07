@@ -129,7 +129,7 @@ function SearchBar(props: any) {
         {isTextInputFocused ? 'Back' : 'Search'}
       </Text>
       <View style={styles.searchBarTextInputWrapper}>
-        <TextInput
+        {/* <TextInput
           style={styles.searchBarTextInput}
           placeholder="Search here"
           value={textInput}
@@ -137,12 +137,27 @@ function SearchBar(props: any) {
           onChangeText={setTextInput}
           onSubmitEditing={addAddressToList}
           autoCorrect={false}
-        />
+        /> */}
         <GooglePlacesAutocomplete
           placeholder="Search"
-          onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
-            console.log(data, details)
+          fetchDetails={true}
+          onPress={(_data, details = null) => {
+            console.log(
+              details?.address_components.map(
+                (component) =>
+                  component.short_name +
+                  ' ' +
+                  component.types
+              )
+            )
+            console.log(
+              'lat:',
+              details?.geometry.location.lat
+            )
+            console.log(
+              'long:',
+              details?.geometry.location.lng
+            )
           }}
           query={{
             key: CONSTANTS.GOOGLE_PLACES_API_KEY,
