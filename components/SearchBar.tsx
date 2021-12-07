@@ -8,10 +8,10 @@ import { styles } from '../styles/HomeScreenStyle'
 export default function SearchBar(props: any) {
   function addNewLocation(newLocation: any) {
     const locationLimitReached =
-      props.locations.length >
-      CONSTANTS.LOCATIONS_MAX_AMOUNT
+      props.locations.length >=
+      CONSTANTS.LOCATIONS_LIMIT_MAX
 
-    const locationIsAlreadyInList =
+    const locationAlreadyExists =
       props.locations !== [] &&
       props.locations.some(
         (location: any) => location.key === newLocation.key
@@ -22,11 +22,11 @@ export default function SearchBar(props: any) {
         Alert.alert(
           'Hello',
           'The current location limit is ' +
-            CONSTANTS.LOCATIONS_MAX_AMOUNT,
+            CONSTANTS.LOCATIONS_LIMIT_MAX,
           [{ text: 'OK' }]
         )
         break
-      case locationIsAlreadyInList:
+      case locationAlreadyExists:
         Alert.alert(
           'Hello',
           'Location is already added, please select another location',
