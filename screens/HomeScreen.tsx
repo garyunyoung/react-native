@@ -58,10 +58,6 @@ export default function HomeScreen() {
 }
 
 function SearchBar(props: any) {
-  const [isTextInputFocused, setIsTextInputFocused] =
-    useState(false)
-  const [textInput, setTextInput] = useState('')
-
   function addAddressToList(address: any) {
     props.setAddresses([...props.addressess, address])
   }
@@ -79,19 +75,8 @@ function SearchBar(props: any) {
 
   return (
     <View style={styles.searchBar}>
-      <Text style={styles.searchBarBack}>
-        {isTextInputFocused ? 'Back' : 'Search'}
-      </Text>
+      <Text>Search</Text>
       <View style={styles.searchBarTextInputWrapper}>
-        {/* <TextInput
-          style={styles.searchBarTextInput}
-          placeholder="Search here"
-          value={textInput}
-          onFocus={() => setIsTextInputFocused(true)}
-          onChangeText={setTextInput}
-          onSubmitEditing={addAddressToList}
-          autoCorrect={false}
-        /> */}
         <GooglePlacesAutocomplete
           placeholder="Search"
           fetchDetails={true}
@@ -188,23 +173,8 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
 
-  searchBarBack: {},
-
   searchBarTextInputWrapper: {
-    flexShrink: 1,
-    width: '100%'
-  },
-
-  searchBarTextInput: {
-    fontSize: 18,
-
-    paddingVertical: 12,
-    paddingHorizontal: 8
-  },
-
-  searchBarDeleteTextInput: {
-    color: 'red',
-    paddingLeft: 16
+    flex: 1
   },
 
   map: {
