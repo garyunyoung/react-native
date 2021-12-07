@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
-
 import { View } from 'react-native'
 
 import Map from '../components/Map'
@@ -11,39 +9,43 @@ import Destinations from '../components/Destinations'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function HomeScreen() {
-  const [addressess, setAddresses] = useState([])
-  const [mapRegion, setMapRegion] = useState({
+  const aucklandMapRegion = {
     latitude: -36.848461,
     longitude: 174.763336,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421
-  })
-  const [showDirections, setShowDirections] =
+  }
+
+  const [locations, setLocations] = useState([])
+  const [mapRegion, setMapRegion] = useState(
+    aucklandMapRegion
+  )
+  const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
 
-  const directions = addressess.map(
-    (address: any) => address.coordinates
+  const locationsCoordinates = locations.map(
+    (location: any) => location.coordinates
   )
 
   return (
     <View style={styles.container}>
       <Map
+        locations={locations}
         mapRegion={mapRegion}
-        showDirections={showDirections}
-        directions={directions}
-        addressess={addressess}
+        locationsCoordinates={locationsCoordinates}
+        isDirectionsVisible={isDirectionsVisible}
       />
       <SearchBar
-        addressess={addressess}
-        setAddresses={setAddresses}
+        locations={locations}
+        setLocations={setLocations}
         setMapRegion={setMapRegion}
       />
       <Destinations
-        addressess={addressess}
-        setAddresses={setAddresses}
-        directions={directions}
-        showDirections={showDirections}
-        setShowDirections={setShowDirections}
+        locations={locations}
+        setLocations={setLocations}
+        locationsCoordinates={locationsCoordinates}
+        isDirectionsVisible={isDirectionsVisible}
+        setIsDirectionsVisible={setIsDirectionsVisible}
       />
       <ExpoStatusBar style="auto" />
     </View>

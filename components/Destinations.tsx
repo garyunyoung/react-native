@@ -1,40 +1,40 @@
 import React from 'react'
-
 import { View, Text, FlatList, Alert } from 'react-native'
-
 import { styles } from '../styles/HomeScreenStyle'
 
-export default function Destinations(props) {
+export default function Destinations(props: any) {
   return (
     <View>
       <View style={styles.heading}>
         <Text style={styles.headingText}>Destinations</Text>
         <Text
           onPress={() => {
-            if (props.directions.length <= 1) {
+            if (props.locationsCoordinates.length <= 1) {
               Alert.alert(
                 'Hello',
-                'You need at least two addresses, please select one more address',
+                'You need at least two addresses, please add another address',
                 [{ text: 'OK' }]
               )
             } else {
-              props.setShowDirections(!props.showDirections)
+              props.setIsDirectionsVisible(
+                !props.isDirectionsVisible
+              )
             }
           }}
         >
           {`${
-            props.showDirections ? 'hide' : 'show'
+            props.isDirectionsVisible ? 'hide' : 'show'
           } directions`}
         </Text>
       </View>
       <FlatList
-        data={props.addressess}
+        data={props.locations}
         renderItem={({ item, index }) => (
-          <ListItem
+          <DestinationListItem
             item={item}
             index={index}
-            addressess={props.addressess}
-            setAddresses={props.setAddresses}
+            locations={props.locations}
+            setLocations={props.setLocations}
           />
         )}
       />
@@ -42,13 +42,13 @@ export default function Destinations(props) {
   )
 }
 
-function ListItem(props: any) {
+function DestinationListItem(props: any) {
   function removeAddressFromList(addressKey: any) {
-    let newAddressess = props.addressess.filter(
-      (address) => address.key !== addressKey
+    let newlocations = props.locations.filter(
+      (address: any) => address.key !== addressKey
     )
 
-    props.setAddresses(newAddressess)
+    props.setLocations(newlocations)
   }
 
   return (

@@ -1,42 +1,53 @@
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-
 import { SafeAreaView, View, Alert } from 'react-native'
 
 import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function SearchBar(props: any) {
-  function addAddressToList(address: any) {
-    if (props.addressess.length === 5) {
-      Alert.alert(
-        'Hello',
-        'The current address limit is 5',
-        [{ text: 'OK' }]
+  function addNewLocation(newLocation: any) {
+    const locationLimitReached =
+      props.locations.length >
+      CONSTANTS.LOCATIONS_MAX_AMOUNT
+
+    const locationIsAlreadyInList =
+      props.locations !== [] &&
+      props.locations.some(
+        (location: any) => location.key === newLocation.key
       )
-    } else if (
-      props.addressess !== [] &&
-      props.addressess.some(
-        (existingAddress: any) =>
-          existingAddress.key === address.key
-      )
-    ) {
-      Alert.alert(
-        'Hello',
-        'Address is already added, please select another address',
-        [{ text: 'OK' }]
-      )
-    } else {
-      props.setAddresses([...props.addressess, address])
+
+    switch (true) {
+      case locationLimitReached:
+        Alert.alert(
+          'Hello',
+          'The current location limit is ' +
+            CONSTANTS.LOCATIONS_MAX_AMOUNT,
+          [{ text: 'OK' }]
+        )
+        break
+      case locationIsAlreadyInList:
+        Alert.alert(
+          'Hello',
+          'Location is already added, please select another location',
+          [{ text: 'OK' }]
+        )
+        break
+      default:
+        props.setLocations([
+          ...props.locations,
+          newLocation
+        ])
+        break
     }
   }
 
   function getAddressComponentValue(
     details: any,
-    component: string
+    field: string
   ) {
     for (let addressComponent of details?.address_components) {
-      if (addressComponent.types.includes(component)) {
+      if (addressComponent.types.includes(field)) {
         return addressComponent.long_name
       }
     }
@@ -58,7 +69,7 @@ export default function SearchBar(props: any) {
       'locality'
     )
 
-    const address = {
+    const newLocation = {
       key: key,
       streetAddress: `${streetNumber} ${route}`,
       city: `${sublocality} ${locality}`,
@@ -68,15 +79,15 @@ export default function SearchBar(props: any) {
       }
     }
 
-    const region = {
+    const newMapRegion = {
       latitude: details?.geometry.location.lat,
       longitude: details?.geometry.location.lng,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421
     }
 
-    props.setMapRegion(region)
-    addAddressToList(address)
+    props.setMapRegion(newMapRegion)
+    addNewLocation(newLocation)
   }
 
   return (

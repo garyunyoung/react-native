@@ -1,5 +1,4 @@
 import React from 'react'
-
 import MapView, {
   PROVIDER_GOOGLE,
   Marker
@@ -16,11 +15,13 @@ export default function Map(props: any) {
       initialRegion={props.mapRegion}
       provider={PROVIDER_GOOGLE}
     >
-      {props.showDirections ? (
-        <Directions directions={props.directions} />
+      {props.isDirectionsVisible ? (
+        <MapDirections
+          locationsCoordinates={props.locationsCoordinates}
+        />
       ) : null}
 
-      {props.addressess.map(
+      {props.locations.map(
         (address: any, index: number) => (
           <Marker
             key={index}
@@ -33,9 +34,9 @@ export default function Map(props: any) {
   )
 }
 
-function Directions(props: any) {
-  const origin = props.directions[0]
-  const waypoints = props.directions.slice(1, -1)
+function MapDirections(props: any) {
+  const origin = props.locationsCoordinates[0]
+  const waypoints = props.locationsCoordinates.slice(1, -1)
 
   return (
     <MapViewDirections
@@ -43,11 +44,11 @@ function Directions(props: any) {
       waypoints={waypoints}
       destination={origin}
       apikey={CONSTANTS.GOOGLE_PLACES_API_KEY}
-      optimizeWaypoints={true}
+      // optimizeWaypoints={true}
       onReady={(result) => {
         console.log(`Distance: ${result.distance} km`)
         console.log(`Duration: ${result.duration} min.`)
-        console.log(`Waypoint: ${result.waypointOrder}.`)
+        // console.log(`Waypoint: ${result.waypointOrder}.`)
       }}
     />
   )
