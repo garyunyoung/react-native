@@ -69,48 +69,48 @@ function SearchBar(props: any) {
     }
   }
 
+  function handleOnPress(details: any) {
+    let key = details?.place_id
+    let streetNumber = getAddressComponentValue(
+      details,
+      'street_number'
+    )
+    let route = getAddressComponentValue(details, 'route')
+    let sublocality = getAddressComponentValue(
+      details,
+      'sublocality'
+    )
+    let locality = getAddressComponentValue(
+      details,
+      'locality'
+    )
+
+    const address = {
+      key: key,
+      streetAddress: `${streetNumber} ${route}`,
+      city: `${sublocality} ${locality}`
+    }
+
+    const region = {
+      latitude: details?.geometry.location.lat,
+      longitude: details?.geometry.location.lng,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421
+    }
+
+    props.setMapRegion(region)
+    addAddressToList(address)
+  }
+
   return (
     <View style={styles.searchBar}>
-      <Text>Search</Text>
       <View style={styles.searchBarTextInputWrapper}>
         <GooglePlacesAutocomplete
           placeholder="Search"
           fetchDetails={true}
-          onPress={(_data, details = null) => {
-            let key = details?.place_id
-            let streetNumber = getAddressComponentValue(
-              details,
-              'street_number'
-            )
-            let route = getAddressComponentValue(
-              details,
-              'route'
-            )
-            let sublocality = getAddressComponentValue(
-              details,
-              'sublocality'
-            )
-            let locality = getAddressComponentValue(
-              details,
-              'locality'
-            )
-
-            const address = {
-              key: key,
-              streetAddress: `${streetNumber} ${route}`,
-              city: `${sublocality} ${locality}`
-            }
-
-            const region = {
-              latitude: details?.geometry.location.lat,
-              longitude: details?.geometry.location.lng,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421
-            }
-
-            props.setMapRegion(region)
-            addAddressToList(address)
-          }}
+          onPress={(_data, details = null) =>
+            handleOnPress(details)
+          }
           query={{
             key: CONSTANTS.GOOGLE_PLACES_API_KEY,
             language: 'en'
