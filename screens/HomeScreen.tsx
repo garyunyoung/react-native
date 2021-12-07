@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import MapView, { Marker } from 'react-native-maps'
+import MapView, {
+  PROVIDER_GOOGLE,
+  Marker,
+  Polyline
+} from 'react-native-maps'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
@@ -23,10 +27,29 @@ export default function HomeScreen() {
     longitudeDelta: 0.0421
   })
 
+  console.log(
+    addressess.map((address) => address.coordinates)
+  )
+
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} initialRegion={mapRegion}>
-        <Marker coordinate={mapRegion} title="Marker" />
+      <MapView
+        style={styles.map}
+        initialRegion={mapRegion}
+        provider={PROVIDER_GOOGLE}
+      >
+        <Polyline
+          coordinates={addressess.map(
+            (address) => address.coordinates
+          )}
+        />
+
+        {addressess.map((address) => (
+          <Marker
+            coordinate={address.coordinates}
+            title={address.streetAddress}
+          />
+        ))}
       </MapView>
       <SafeAreaView style={styles.header}>
         <SearchBar
@@ -113,7 +136,11 @@ function SearchBar(props: any) {
     const address = {
       key: key,
       streetAddress: `${streetNumber} ${route}`,
-      city: `${sublocality} ${locality}`
+      city: `${sublocality} ${locality}`,
+      coordinates: {
+        latitude: details?.geometry.location.lat,
+        longitude: details?.geometry.location.lng
+      }
     }
 
     const region = {
