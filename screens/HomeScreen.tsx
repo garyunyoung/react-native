@@ -65,15 +65,27 @@ export default function HomeScreen() {
           <Text style={styles.headingText}>
             Destinations
           </Text>
-          {directions.length >= 2 ? (
-            <Text
-              onPress={() =>
+          <Text
+            onPress={() => {
+              if (directions.length <= 1) {
+                Alert.alert(
+                  'Hello',
+                  'You need at least two addresses, please select one more address',
+                  [
+                    {
+                      text: 'OK',
+                      onPress: () =>
+                        console.log('Alert Dismissed')
+                    }
+                  ]
+                )
+              } else {
                 setShowDirections(!showDirections)
               }
-            >
-              {showDirections ? 'hide' : 'show'} directions
-            </Text>
-          ) : null}
+            }}
+          >
+            {showDirections ? 'hide' : 'show'} directions
+          </Text>
         </View>
         <FlatList
           data={addressess}
@@ -114,7 +126,14 @@ function Directions(props: any) {
 
 function SearchBar(props: any) {
   function addAddressToList(address: any) {
-    if (
+    if (props.addressess.length === 5) {
+      Alert.alert('Hello', 'Current address limit is 5', [
+        {
+          text: 'OK',
+          onPress: () => console.log('Alert Dismissed')
+        }
+      ])
+    } else if (
       props.addressess !== [] &&
       props.addressess.some(
         (existingAddress) =>
