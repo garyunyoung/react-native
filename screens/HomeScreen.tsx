@@ -119,10 +119,6 @@ function SearchBar(props: any) {
     setTextInput('')
   }
 
-  const clearTextInput = () => {
-    setTextInput('')
-  }
-
   return (
     <View style={styles.searchBar}>
       <Text style={styles.searchBarBack}>
@@ -165,14 +161,6 @@ function SearchBar(props: any) {
           }}
         />
       </View>
-      {textInput !== '' ? (
-        <Text
-          style={styles.searchBarDeleteTextInput}
-          onPress={clearTextInput}
-        >
-          X
-        </Text>
-      ) : null}
     </View>
   )
 }
