@@ -9,10 +9,9 @@ import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function Map({
+  locations,
   mapRegion,
-  isDirectionsVisible,
-  locationsCoordinates,
-  locations
+  isDirectionsVisible
 }) {
   return (
     <MapView
@@ -21,7 +20,7 @@ export default function Map({
       provider={PROVIDER_GOOGLE}
     >
       {isDirectionsVisible ? (
-        <MapDirections coordinates={locationsCoordinates} />
+        <MapDirections locations={locations} />
       ) : null}
 
       {locations.map((address: any, index: number) => (
@@ -35,7 +34,11 @@ export default function Map({
   )
 }
 
-function MapDirections({ coordinates }) {
+function MapDirections({ locations }) {
+  const coordinates = locations.map(
+    (location: any) => location.coordinates
+  )
+
   // TO DO: Test conditionals
   const origin = coordinates[0]
   const destination =

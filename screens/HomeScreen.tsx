@@ -23,16 +23,12 @@ export default function HomeScreen() {
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
 
-  const locationsCoordinates = locations.map(
-    (location: any) => location.coordinates
-  )
-
   return (
     <View style={styles.container}>
       <Map
         locations={locations}
         mapRegion={mapRegion}
-        locationsCoordinates={locationsCoordinates}
+        // locationsCoordinates={locationsCoordinates}
         isDirectionsVisible={isDirectionsVisible}
       />
       <SearchBar
