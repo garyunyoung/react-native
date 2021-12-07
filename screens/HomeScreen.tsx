@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import MapView, { Marker } from 'react-native-maps'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
 import CONSTANTS from '../variables/constants'
 import { height, width } from '../variables/theme'
@@ -89,6 +90,7 @@ export default function HomeScreen() {
           setAddresses={setAddresses}
         />
       </SafeAreaView>
+
       <View>
         <View style={styles.heading}>
           <Text style={styles.headingText}>
@@ -136,6 +138,17 @@ function SearchBar(props: any) {
           onSubmitEditing={addAddressToList}
           autoCorrect={false}
         />
+        <GooglePlacesAutocomplete
+          placeholder="Search"
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log(data, details)
+          }}
+          query={{
+            key: CONSTANTS.GOOGLE_PLACES_API_KEY,
+            language: 'en'
+          }}
+        />
       </View>
       {textInput !== '' ? (
         <Text
@@ -173,7 +186,7 @@ const styles = StyleSheet.create({
   header: {
     position: 'absolute',
     top:
-      Platform.OS === CONSTANTS.android
+      Platform.OS === CONSTANTS.ANDROID
         ? StatusBar.currentHeight
         : 0,
     left: 0,
