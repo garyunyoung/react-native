@@ -26,6 +26,8 @@ export default function HomeScreen() {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421
   })
+  const [showDirections, setShowDirections] =
+    useState(false)
 
   const directions = addressess.map(
     (address) => address.coordinates
@@ -38,7 +40,7 @@ export default function HomeScreen() {
         initialRegion={mapRegion}
         provider={PROVIDER_GOOGLE}
       >
-        {directions.length >= 2 ? (
+        {showDirections ? (
           <Directions directions={directions} />
         ) : null}
 
@@ -63,6 +65,15 @@ export default function HomeScreen() {
           <Text style={styles.headingText}>
             Destinations
           </Text>
+          {directions.length >= 2 ? (
+            <Text
+              onPress={() =>
+                setShowDirections(!showDirections)
+              }
+            >
+              {showDirections ? 'hide' : 'show'} directions
+            </Text>
+          ) : null}
         </View>
         <FlatList
           data={addressess}
