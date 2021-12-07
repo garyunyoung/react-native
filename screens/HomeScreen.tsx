@@ -43,8 +43,8 @@ export default function HomeScreen() {
         </View>
         <FlatList
           data={addressess}
-          renderItem={({ item }) => (
-            <ListItem item={item} />
+          renderItem={({ item, index }) => (
+            <ListItem item={item} index={index} />
           )}
         />
       </View>
@@ -125,7 +125,7 @@ function ListItem(props: any) {
     <View style={styles.listItem}>
       <Text style={styles.listItemDelete}>X</Text>
       <Text style={styles.listItemNumber}>
-        {props.item.id}
+        {props.index + 1}
       </Text>
       <View>
         <Text>{props.item.streetAddress}</Text>
