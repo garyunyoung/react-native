@@ -4,6 +4,7 @@ import MapView, {
   Marker,
   Polyline
 } from 'react-native-maps'
+import MapViewDirections from 'react-native-maps-directions'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
@@ -38,6 +39,31 @@ export default function HomeScreen() {
         initialRegion={mapRegion}
         provider={PROVIDER_GOOGLE}
       >
+        <MapViewDirections
+          origin={{
+            latitude: -36.8958085,
+            longitude: 174.8325132
+          }}
+          waypoints={[
+            {
+              latitude: -36.89028,
+              longitude: 174.7024703
+            },
+            {
+              latitude: -36.8733497,
+              longitude: 174.7430372
+            }
+          ]}
+          destination={{
+            latitude: -36.8958085,
+            longitude: 174.8325132
+          }}
+          apikey={CONSTANTS.GOOGLE_PLACES_API_KEY}
+          onReady={(result) => {
+            console.log(`Distance: ${result.distance} km`)
+            console.log(`Duration: ${result.duration} min.`)
+          }}
+        />
         <Polyline
           coordinates={addressess.map(
             (address) => address.coordinates
