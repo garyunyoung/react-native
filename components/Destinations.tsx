@@ -15,21 +15,16 @@ export default function Destinations(props) {
               Alert.alert(
                 'Hello',
                 'You need at least two addresses, please select one more address',
-                [
-                  {
-                    text: 'OK',
-                    onPress: () =>
-                      console.log('Alert Dismissed')
-                  }
-                ]
+                [{ text: 'OK' }]
               )
             } else {
               props.setShowDirections(!props.showDirections)
             }
           }}
         >
-          {props.showDirections ? 'hide' : 'show'}{' '}
-          directions
+          {`${
+            props.showDirections ? 'hide' : 'show'
+          } directions`}
         </Text>
       </View>
       <FlatList

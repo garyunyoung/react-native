@@ -22,7 +22,7 @@ export default function HomeScreen() {
     useState(false)
 
   const directions = addressess.map(
-    (address) => address.coordinates
+    (address: any) => address.coordinates
   )
 
   return (

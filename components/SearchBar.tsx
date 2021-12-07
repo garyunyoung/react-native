@@ -9,28 +9,22 @@ import { styles } from '../styles/HomeScreenStyle'
 export default function SearchBar(props: any) {
   function addAddressToList(address: any) {
     if (props.addressess.length === 5) {
-      Alert.alert('Hello', 'Current address limit is 5', [
-        {
-          text: 'OK',
-          onPress: () => console.log('Alert Dismissed')
-        }
-      ])
+      Alert.alert(
+        'Hello',
+        'The current address limit is 5',
+        [{ text: 'OK' }]
+      )
     } else if (
       props.addressess !== [] &&
       props.addressess.some(
-        (existingAddress) =>
+        (existingAddress: any) =>
           existingAddress.key === address.key
       )
     ) {
       Alert.alert(
         'Hello',
         'Address is already added, please select another address',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('Alert Dismissed')
-          }
-        ]
+        [{ text: 'OK' }]
       )
     } else {
       props.setAddresses([...props.addressess, address])
