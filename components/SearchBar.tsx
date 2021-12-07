@@ -1,7 +1,7 @@
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
-import { View, Alert, Text } from 'react-native'
+import { SafeAreaView, View, Alert } from 'react-native'
 
 import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
@@ -86,19 +86,21 @@ export default function SearchBar(props: any) {
   }
 
   return (
-    <View style={styles.searchBar}>
-      <GooglePlacesAutocomplete
-        placeholder="Search"
-        fetchDetails={true}
-        onPress={(_data, details = null) =>
-          handleOnPress(details)
-        }
-        query={{
-          key: CONSTANTS.GOOGLE_PLACES_API_KEY,
-          language: 'en',
-          components: 'country:nz'
-        }}
-      />
-    </View>
+    <SafeAreaView style={styles.header}>
+      <View style={styles.searchBar}>
+        <GooglePlacesAutocomplete
+          placeholder="Search"
+          fetchDetails={true}
+          onPress={(_data, details = null) =>
+            handleOnPress(details)
+          }
+          query={{
+            key: CONSTANTS.GOOGLE_PLACES_API_KEY,
+            language: 'en',
+            components: 'country:nz'
+          }}
+        />
+      </View>
+    </SafeAreaView>
   )
 }
