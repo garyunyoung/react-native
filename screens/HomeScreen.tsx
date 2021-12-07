@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import MapView, {
   PROVIDER_GOOGLE,
-  Marker,
-  Polyline
+  Marker
 } from 'react-native-maps'
 import MapViewDirections from 'react-native-maps-directions'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
@@ -28,8 +27,8 @@ export default function HomeScreen() {
     longitudeDelta: 0.0421
   })
 
-  console.log(
-    addressess.map((address) => address.coordinates)
+  const directions = addressess.map(
+    (address) => address.coordinates
   )
 
   return (
@@ -39,39 +38,13 @@ export default function HomeScreen() {
         initialRegion={mapRegion}
         provider={PROVIDER_GOOGLE}
       >
-        <MapViewDirections
-          origin={{
-            latitude: -36.8958085,
-            longitude: 174.8325132
-          }}
-          waypoints={[
-            {
-              latitude: -36.89028,
-              longitude: 174.7024703
-            },
-            {
-              latitude: -36.8733497,
-              longitude: 174.7430372
-            }
-          ]}
-          destination={{
-            latitude: -36.8958085,
-            longitude: 174.8325132
-          }}
-          apikey={CONSTANTS.GOOGLE_PLACES_API_KEY}
-          onReady={(result) => {
-            console.log(`Distance: ${result.distance} km`)
-            console.log(`Duration: ${result.duration} min.`)
-          }}
-        />
-        <Polyline
-          coordinates={addressess.map(
-            (address) => address.coordinates
-          )}
-        />
+        {directions.length >= 2 ? (
+          <Directions directions={directions} />
+        ) : null}
 
-        {addressess.map((address) => (
+        {addressess.map((address, index) => (
           <Marker
+            key={index}
             coordinate={address.coordinates}
             title={address.streetAddress}
           />
@@ -105,6 +78,24 @@ export default function HomeScreen() {
       </View>
       <ExpoStatusBar style="auto" />
     </View>
+  )
+}
+
+function Directions(props: any) {
+  const origin = props.directions[0]
+  const waypoints = props.directions.slice(1, -1)
+
+  return (
+    <MapViewDirections
+      origin={origin}
+      waypoints={waypoints}
+      destination={origin}
+      apikey={CONSTANTS.GOOGLE_PLACES_API_KEY}
+      onReady={(result) => {
+        console.log(`Distance: ${result.distance} km`)
+        console.log(`Duration: ${result.duration} min.`)
+      }}
+    />
   )
 }
 
