@@ -44,7 +44,12 @@ export default function HomeScreen() {
         <FlatList
           data={addressess}
           renderItem={({ item, index }) => (
-            <ListItem item={item} index={index} />
+            <ListItem
+              item={item}
+              index={index}
+              addressess={addressess}
+              setAddresses={setAddresses}
+            />
           )}
         />
       </View>
@@ -121,9 +126,24 @@ function SearchBar(props: any) {
 }
 
 function ListItem(props: any) {
+  function removeAddressFromList(addressKey: any) {
+    let newAddressess = props.addressess.filter(
+      (address) => address.key !== addressKey
+    )
+
+    props.setAddresses(newAddressess)
+  }
+
   return (
     <View style={styles.listItem}>
-      <Text style={styles.listItemDelete}>X</Text>
+      <Text
+        style={styles.listItemDelete}
+        onPress={() =>
+          removeAddressFromList(props.item.key)
+        }
+      >
+        X
+      </Text>
       <Text style={styles.listItemNumber}>
         {props.index + 1}
       </Text>
