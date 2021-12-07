@@ -5,6 +5,7 @@ import { View } from 'react-native'
 import Map from '../components/Map'
 import SearchBar from '../components/SearchBar'
 import Destinations from '../components/Destinations'
+import Directions from '../components/Directions'
 
 import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
@@ -29,12 +30,21 @@ export default function HomeScreen() {
         setLocations={setLocations}
         setMapRegion={setMapRegion}
       />
-      <Destinations
-        locations={locations}
-        setLocations={setLocations}
-        isDirectionsVisible={isDirectionsVisible}
-        setIsDirectionsVisible={setIsDirectionsVisible}
-      />
+
+      {isDirectionsVisible ? (
+        <Directions
+          locations={locations}
+          setIsDirectionsVisible={setIsDirectionsVisible}
+        />
+      ) : (
+        <Destinations
+          locations={locations}
+          setLocations={setLocations}
+          isDirectionsVisible={isDirectionsVisible}
+          setIsDirectionsVisible={setIsDirectionsVisible}
+        />
+      )}
+
       <ExpoStatusBar style="auto" />
     </View>
   )

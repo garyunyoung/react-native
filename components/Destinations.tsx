@@ -26,13 +26,11 @@ export default function Destinations({
                 [{ text: 'OK' }]
               )
             } else {
-              setIsDirectionsVisible(!isDirectionsVisible)
+              setIsDirectionsVisible(true)
             }
           }}
         >
-          {`${
-            isDirectionsVisible ? 'hide' : 'show'
-          } directions`}
+          show directions
         </Text>
       </View>
       <FlatList
