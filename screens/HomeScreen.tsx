@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   View,
   Text,
-  FlatList
+  FlatList,
+  Alert
 } from 'react-native'
 
 import CONSTANTS from '../variables/constants'
@@ -60,7 +61,26 @@ export default function HomeScreen() {
 
 function SearchBar(props: any) {
   function addAddressToList(address: any) {
-    props.setAddresses([...props.addressess, address])
+    if (
+      props.addressess !== [] &&
+      props.addressess.some(
+        (existingAddress) =>
+          existingAddress.key === address.key
+      )
+    ) {
+      Alert.alert(
+        'Hello',
+        'Address is already added, please select another address',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('Alert Dismissed')
+          }
+        ]
+      )
+    } else {
+      props.setAddresses([...props.addressess, address])
+    }
   }
 
   function getAddressComponentValue(
