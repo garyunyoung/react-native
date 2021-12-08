@@ -4,12 +4,11 @@ import {
   Text,
   FlatList,
   Alert,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 
 import CONSTANTS from '../variables/constants'
-import { COLOURS } from '../variables/theme'
 import { styles } from '../styles/Destinations'
 
 export default function Destinations({
@@ -76,16 +75,14 @@ function DestinationListItem({
 
   const showDeleteButton = () => {
     return (
-      <TouchableHighlight
-        activeOpacity={0.6}
-        underlayColor={COLOURS.underlayGrey}
+      <TouchableOpacity
         style={styles.destinationListItemDelete}
         onPress={() => removeLocation(location.key)}
       >
         <Text style={styles.destinationListItemDeleteText}>
           DELETE
         </Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 
