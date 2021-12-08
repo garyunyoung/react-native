@@ -1,8 +1,15 @@
 import React from 'react'
-import { View, Text, FlatList, Alert } from 'react-native'
+import {
+  View,
+  Text,
+  FlatList,
+  Alert,
+  TouchableHighlight
+} from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 
 import CONSTANTS from '../variables/constants'
+import { COLOURS } from '../variables/theme'
 import { styles } from '../styles/Destinations'
 
 export default function Destinations({
@@ -67,21 +74,23 @@ function DestinationListItem({
     setMapRegion(lastLocation)
   }
 
-  const SwipeLeftAction = () => {
+  const showDeleteButton = () => {
     return (
-      <View style={styles.destinationListItemDelete}>
-        <Text
-          style={styles.destinationListItemDeleteText}
-          onPress={() => removeLocation(location.key)}
-        >
+      <TouchableHighlight
+        activeOpacity={0.6}
+        underlayColor={COLOURS.underlayGrey}
+        style={styles.destinationListItemDelete}
+        onPress={() => removeLocation(location.key)}
+      >
+        <Text style={styles.destinationListItemDeleteText}>
           DELETE
         </Text>
-      </View>
+      </TouchableHighlight>
     )
   }
 
   return (
-    <Swipeable renderLeftActions={SwipeLeftAction}>
+    <Swipeable renderLeftActions={showDeleteButton}>
       <View style={styles.destinationListItem}>
         <Text style={styles.destinationListItemNumber}>
           {index + 1}
