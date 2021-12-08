@@ -6,7 +6,7 @@ import { styles } from '../styles/HomeScreenStyle'
 export default function Directions({
   locations,
   setIsDirectionsVisible
-}) {
+}: any) {
   return (
     <View>
       <View style={styles.heading}>
@@ -32,7 +32,7 @@ export default function Directions({
   )
 }
 
-function DestinationListItem({ location, index }) {
+function DestinationListItem({ location, index }: any) {
   return (
     <View style={styles.listItem}>
       <Text style={styles.listItemNumber}>{index + 1}</Text>

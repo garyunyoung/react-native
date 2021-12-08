@@ -9,7 +9,7 @@ export default function SearchBar({
   locations,
   setLocations,
   setMapRegion
-}) {
+}: any) {
   function addNewLocation(newLocation: any) {
     const locationLimitReached =
       locations.length >= CONSTANTS.LOCATIONS_LIMIT_MAX

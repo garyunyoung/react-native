@@ -12,7 +12,7 @@ export default function Map({
   locations,
   mapRegion,
   isDirectionsVisible
-}) {
+}: any) {
   return (
     <MapView
       style={styles.map}
@@ -34,7 +34,7 @@ export default function Map({
   )
 }
 
-function MapDirections({ locations }) {
+function MapDirections({ locations }: any) {
   const coordinates = locations.map(
     (location: any) => location.coordinates
   )

@@ -9,7 +9,7 @@ export default function Destinations({
   setLocations,
   setMapRegion,
   setIsDirectionsVisible
-}) {
+}: any) {
   const notEnoughLocations =
     locations.length < CONSTANTS.LOCATIONS_LIMIT_MIN
 
@@ -50,7 +50,7 @@ function DestinationListItem({
   setLocations,
   location,
   index
-}) {
+}: any) {
   function removeLocation(locationKey: any) {
     let newlocations = existingLocations.filter(
       (existingLocation: any) =>
