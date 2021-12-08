@@ -39,18 +39,14 @@ function MapDirections({ locations }) {
     (location: any) => location.coordinates
   )
 
-  // TO DO: Test conditionals
   const origin = coordinates[0]
-  const destination =
-    coordinates.length === 2 ? coordinates[1] : origin
-
-  const waypoints = coordinates.slice(1, -1)
+  const waypoints = coordinates.slice(1)
 
   return (
     <MapViewDirections
       origin={origin}
       waypoints={waypoints}
-      destination={destination}
+      destination={origin}
       apikey={CONSTANTS.GOOGLE_API_KEY}
       // optimizeWaypoints={true}
       onReady={({ distance, duration }) => {
