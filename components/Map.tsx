@@ -54,6 +54,7 @@ function MapDirections({ locations }: any) {
         console.log(`Duration: ${duration} min.`)
         // console.log(`Waypoint: ${result.waypointOrder}.`)
       }}
+      lineDashPattern={[0]}
     />
   )
 }
