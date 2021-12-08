@@ -102,6 +102,16 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     color: 'gray'
+  },
+
+  searchInputLeftButton: {
+    width: 44,
+    height: 44,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 8,
+    marginRight: 8
   }
 })
 
@@ -109,12 +119,8 @@ export const searchResultStyles = {
   container: {},
 
   textInputContainer: {
-    marginHorizontal: 16,
-    marginBottom: 16
-  },
-
-  textInput: {
-    fontSize: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
 
     backgroundColor: 'white',
 
@@ -122,7 +128,17 @@ export const searchResultStyles = {
     borderWidth: 0.5,
     borderColor: 'lightgray',
 
-    padding: 16
+    paddingRight: 8,
+    marginHorizontal: 16,
+    marginBottom: 16
+  },
+
+  textInput: {
+    fontSize: 16,
+    flexGrow: 1,
+
+    paddingVertical: 16,
+    paddingRight: 16
   },
 
   listView: {

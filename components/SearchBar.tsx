@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import {
   SafeAreaView,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Keyboard
 } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 import constants from '../variables/constants'
 import {
@@ -26,6 +27,7 @@ export default function SearchBar({
   locations,
   setLocations,
   setMapRegion,
+  isKeyboardVisible,
   setKeyboardVisible
 }: any) {
   function addNewLocation(newLocation: any) {
@@ -114,6 +116,11 @@ export default function SearchBar({
     }
   }, [])
 
+  const dismissKeyboard = () => {
+    Keyboard.dismiss()
+    setKeyboardVisible(false)
+  }
+
   return (
     <SafeAreaView style={styles.header}>
       <GooglePlacesAutocomplete
@@ -129,6 +136,12 @@ export default function SearchBar({
         }}
         enablePoweredByContainer={false}
         renderRow={(data) => renderSearchResultRow(data)}
+        renderLeftButton={() =>
+          renderSearchInputIcon(
+            isKeyboardVisible,
+            dismissKeyboard
+          )
+        }
         suppressDefaultStyles={true}
         styles={searchResultStyles}
       />
@@ -145,6 +158,30 @@ function getAddressComponentValue(
       return addressComponent.long_name
     }
   }
+}
+
+function renderSearchInputIcon(
+  isKeyboardVisible: boolean,
+  dismissKeyboard: any
+) {
+  return isKeyboardVisible ? (
+    <View style={styles.searchInputLeftButton}>
+      <Ionicons
+        name="md-chevron-back"
+        size={32}
+        color="black"
+        onPress={dismissKeyboard}
+      />
+    </View>
+  ) : (
+    <View style={styles.searchInputLeftButton}>
+      <Ionicons
+        name="md-search-outline"
+        size={24}
+        color="gray"
+      />
+    </View>
+  )
 }
 
 function renderSearchResultRow(data: any) {

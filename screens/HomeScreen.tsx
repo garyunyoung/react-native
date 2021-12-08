@@ -35,6 +35,7 @@ export default function HomeScreen() {
         locations={locations}
         setLocations={setLocations}
         setMapRegion={setMapRegion}
+        isKeyboardVisible={isKeyboardVisible}
         setKeyboardVisible={setKeyboardVisible}
       />
 
