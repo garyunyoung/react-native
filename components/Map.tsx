@@ -23,11 +23,11 @@ export default function Map({
         <MapDirections locations={locations} />
       ) : null}
 
-      {locations.map((address: any, index: number) => (
+      {locations.map((location: any, index: number) => (
         <Marker
           key={index}
-          coordinate={address.coordinates}
-          title={address.address}
+          coordinate={location.coordinates}
+          title={location.location}
         />
       ))}
     </MapView>

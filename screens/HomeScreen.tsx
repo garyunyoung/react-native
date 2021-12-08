@@ -40,7 +40,6 @@ export default function HomeScreen() {
         <Destinations
           locations={locations}
           setLocations={setLocations}
-          isDirectionsVisible={isDirectionsVisible}
           setIsDirectionsVisible={setIsDirectionsVisible}
         />
       )}

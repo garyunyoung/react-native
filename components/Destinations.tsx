@@ -7,7 +7,6 @@ import { styles } from '../styles/HomeScreenStyle'
 export default function Destinations({
   locations,
   setLocations,
-  isDirectionsVisible,
   setIsDirectionsVisible
 }) {
   const needsMoreLocations =

@@ -14,35 +14,30 @@ export default function SearchBar({
     const locationLimitReached =
       locations.length >= CONSTANTS.LOCATIONS_LIMIT_MAX
 
-    const locationAlreadyExists =
-      locations !== [] &&
-      locations.some(
-        (location: any) => location.key === newLocation.key
-      )
+    const locationAlreadyExists = locations.some(
+      (location: any) => location.key === newLocation.key
+    )
 
-    switch (true) {
-      case locationLimitReached:
-        Alert.alert(
-          'Hello',
-          'The current location limit is ' +
-            CONSTANTS.LOCATIONS_LIMIT_MAX,
-          [{ text: 'OK' }]
-        )
-        break
-      case locationAlreadyExists:
-        Alert.alert(
-          'Hello',
-          'Location is already added, please select another location',
-          [{ text: 'OK' }]
-        )
-        break
-      default:
-        setLocations([...locations, newLocation])
-        break
+    if (locationLimitReached) {
+      Alert.alert(
+        'Hello',
+        'The current location limit is ' +
+          CONSTANTS.LOCATIONS_LIMIT_MAX,
+        [{ text: 'OK' }]
+      )
+    } else if (locationAlreadyExists) {
+      Alert.alert(
+        'Hello',
+        'Location is already added, please select another location',
+        [{ text: 'OK' }]
+      )
+    } else {
+      setLocations([...locations, newLocation])
     }
   }
 
   function handleOnPress(details: any) {
+    // TO DO: move this out of componenet - return object with new location and new map region
     let key = details?.place_id
     let streetNumber = getAddressComponentValue(
       details,
@@ -79,17 +74,6 @@ export default function SearchBar({
     addNewLocation(newLocation)
   }
 
-  function getAddressComponentValue(
-    details: any,
-    field: string
-  ) {
-    for (let addressComponent of details?.address_components) {
-      if (addressComponent.types.includes(field)) {
-        return addressComponent.long_name
-      }
-    }
-  }
-
   return (
     <SafeAreaView style={styles.header}>
       <View style={styles.searchBar}>
@@ -108,4 +92,15 @@ export default function SearchBar({
       </View>
     </SafeAreaView>
   )
+}
+
+function getAddressComponentValue(
+  details: any,
+  field: string
+) {
+  for (let addressComponent of details?.address_components) {
+    if (addressComponent.types.includes(field)) {
+      return addressComponent.long_name
+    }
+  }
 }
