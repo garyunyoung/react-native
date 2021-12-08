@@ -15,7 +15,7 @@ import {
   DEFAULT_MAP_REGION
 } from '../constants/constants'
 
-import { colours } from '../constants/theme'
+import { colours, fonts, sizes } from '../constants/theme'
 
 export default function Destinations(props: any) {
   function showDirections() {
@@ -29,14 +29,14 @@ export default function Destinations(props: any) {
   }
 
   return (
-    <View style={styles.destinations}>
-      <View style={styles.heading}>
+    <View style={styles.container}>
+      <View style={styles.headingContainer}>
         <Text style={styles.headingText}>Destinations</Text>
         <Text onPress={() => showDirections()}>
           show directions
         </Text>
       </View>
-      <View style={styles.destinationsList}>
+      <View style={styles.listContainer}>
         <FlatList
           data={props.locations}
           renderItem={({ item, index }) => (
@@ -58,14 +58,10 @@ function DestinationListItem(props: any) {
   function renderDeleteButton() {
     return (
       <TouchableOpacity
-        style={styles.destinationListItemDelete}
-        onPress={() =>
-          removeLocation(props.location.placeId)
-        }
+        style={styles.deleteButton}
+        onPress={() => removeLocation(props.location.key)}
       >
-        <Text style={styles.destinationListItemDeleteText}>
-          DELETE
-        </Text>
+        <Text style={styles.deleteButtonText}>DELETE</Text>
       </TouchableOpacity>
     )
   }
@@ -90,15 +86,15 @@ function DestinationListItem(props: any) {
     <Swipeable
       renderLeftActions={() => renderDeleteButton()}
     >
-      <View style={styles.destinationListItem}>
-        <Text style={styles.destinationListItemNumber}>
+      <View style={styles.listItem}>
+        <Text style={styles.listItemIndex}>
           {props.index + 1}
         </Text>
         <View>
-          <Text style={styles.destinationListItemAddress}>
+          <Text style={styles.listItemTitle}>
             {props.location.mainText}
           </Text>
-          <Text style={styles.destinationListItemCity}>
+          <Text style={styles.listItemBody}>
             {props.location.secondaryText}
           </Text>
         </View>
@@ -108,74 +104,77 @@ function DestinationListItem(props: any) {
 }
 
 const styles = StyleSheet.create({
-  destinations: {
+  container: {
     flex: 1
   },
 
-  heading: {
+  headingContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
 
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-
     borderBottomWidth: 0.5,
-    borderBottomColor: 'lightgray'
+    borderBottomColor: 'lightgray',
+
+    paddingHorizontal: sizes.paddingHorizontalEdge,
+    paddingVertical: 16
   },
 
   headingText: {
-    fontSize: 24,
-    fontWeight: 'bold'
+    fontSize: fonts.h1.fontSize,
+    fontWeight: 'bold',
+    color: fonts.h1.color
   },
 
-  destinationsList: {
+  listContainer: {
     flex: 1
   },
 
-  destinationListItem: {
+  listItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
 
     paddingVertical: 16,
-    paddingHorizontal: 16
+    paddingHorizontal: sizes.paddingHorizontalEdge
   },
 
-  destinationListItemAddress: {
-    fontSize: 16,
+  listItemTitle: {
+    fontSize: fonts.title.fontSize,
     fontWeight: 'bold',
+    color: fonts.title.color,
+
     marginBottom: 2
   },
 
-  destinationListItemCity: {
-    fontSize: 14,
-    color: 'gray'
+  listItemBody: {
+    fontSize: fonts.body.fontSize,
+    fontWeight: 'normal',
+    color: fonts.body.color
   },
 
-  destinationListItemDelete: {
+  deleteButton: {
     alignItems: 'center',
     justifyContent: 'center',
 
     backgroundColor: colours.errorRed,
-
     paddingHorizontal: 24
   },
 
-  destinationListItemDeleteText: {
-    fontSize: 14,
+  deleteButtonText: {
+    fontSize: fonts.button.fontSize,
     fontWeight: 'bold',
     color: 'white'
   },
 
-  destinationListItemNumber: {
-    fontWeight: 'bold',
+  listItemIndex: {
     fontSize: 16,
+    fontWeight: 'bold',
 
     backgroundColor: 'lightgray',
 
-    paddingVertical: 8,
     paddingHorizontal: 14,
+    paddingVertical: 8,
     marginRight: 24
   }
 })

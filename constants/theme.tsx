@@ -2,7 +2,9 @@ import { Dimensions } from 'react-native'
 
 const sizes = {
   height: Dimensions.get('window').height,
-  width: Dimensions.get('window').width
+  width: Dimensions.get('window').width,
+
+  paddingHorizontalEdge: 16
 }
 
 const colours = {
@@ -14,15 +16,21 @@ const fonts = {
   h1: {
     fontSize: 24,
     fontWeight: 'bold',
-    colour: 'black'
+    color: 'black'
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'black'
   },
   body: {
     fontSize: 14,
+    fontWeight: 'normal',
     color: 'gray'
+  },
+  button: {
+    fontSize: 14,
+    fontWeight: 'bold'
   }
 }
 
