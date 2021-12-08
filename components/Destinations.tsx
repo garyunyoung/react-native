@@ -12,7 +12,7 @@ import renderAlert from './Alert'
 
 import {
   LOCATIONS_MIN,
-  AUCKLAND_MAP_REGION
+  DEFAULT_MAP_REGION
 } from '../constants/constants'
 
 import { colours } from '../constants/theme'
@@ -78,7 +78,7 @@ function DestinationListItem(props: any) {
 
     const lastLocation =
       filteredLocations.length < 1
-        ? AUCKLAND_MAP_REGION
+        ? DEFAULT_MAP_REGION
         : filteredLocations[filteredLocations.length - 1]
             .coordinates
 

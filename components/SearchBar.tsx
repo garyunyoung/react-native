@@ -14,7 +14,9 @@ import {
   GOOGLE_API_KEY,
   LOCATIONS_MAX,
   LATITUDE_DELTA,
-  LONGITUDE_DELTA
+  LONGITUDE_DELTA,
+  SEARCH_RESULTS_LANGUAGE,
+  SEARCH_RESULTS_REGION
 } from '../constants/constants'
 
 import renderAlert from './Alert'
@@ -86,8 +88,8 @@ export default function SearchBar({
         placeholder="Search"
         query={{
           key: GOOGLE_API_KEY,
-          language: 'en',
-          components: 'country:nz'
+          language: SEARCH_RESULTS_LANGUAGE,
+          components: SEARCH_RESULTS_REGION
         }}
         fetchDetails={true}
         onPress={(data, details = null) =>

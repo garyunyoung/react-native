@@ -7,13 +7,13 @@ import SearchBar from '../components/SearchBar'
 import Destinations from '../components/Destinations'
 import Directions from '../components/Directions'
 
-import { AUCKLAND_MAP_REGION } from '../constants/constants'
+import { DEFAULT_MAP_REGION } from '../constants/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function HomeScreen() {
   const [locations, setLocations] = useState([])
   const [mapRegion, setMapRegion] = useState(
-    AUCKLAND_MAP_REGION
+    DEFAULT_MAP_REGION
   )
 
   const [isDirectionsVisible, setIsDirectionsVisible] =
