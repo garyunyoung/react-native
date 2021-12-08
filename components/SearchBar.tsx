@@ -9,7 +9,10 @@ import {
 } from 'react-native'
 
 import constants from '../variables/constants'
-import { styles } from '../styles/HomeScreenStyle'
+import {
+  styles,
+  searchResultStyles
+} from '../styles/HomeScreenStyle'
 
 const {
   GOOGLE_API_KEY,
@@ -103,7 +106,9 @@ export default function SearchBar({
             language: 'en',
             components: 'country:nz'
           }}
+          enablePoweredByContainer={false}
           renderRow={(data) => renderSearchResultRow(data)}
+          styles={searchResultStyles}
         />
       </View>
     </SafeAreaView>

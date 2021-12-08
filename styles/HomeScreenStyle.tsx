@@ -117,3 +117,7 @@ export const styles = StyleSheet.create({
     color: 'gray'
   }
 })
+
+export const searchResultStyles = StyleSheet.create({
+  container: {}
+})
