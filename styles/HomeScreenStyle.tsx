@@ -74,5 +74,21 @@ export const styles = StyleSheet.create({
 
   listItemNumber: {
     marginRight: 16
+  },
+
+  // searchResultsContainer: {
+  //   backgroundColor: 'white'
+  // },
+
+  searchResultListItem: {
+    flexDirection: 'row',
+    paddingVertical: 8
+  },
+  searchResultListItemAdd: {
+    fontSize: 20,
+    paddingRight: 24
+  },
+  searchResultListItemText: {
+    fontSize: 16
   }
 })

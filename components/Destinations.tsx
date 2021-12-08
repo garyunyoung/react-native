@@ -76,7 +76,7 @@ function DestinationListItem({
     setMapRegion(lastLocation)
   }
 
-  const showDeleteButton = () => {
+  const renderDeleteButton = () => {
     return (
       <TouchableOpacity
         style={styles.destinationListItemDelete}
@@ -90,7 +90,7 @@ function DestinationListItem({
   }
 
   return (
-    <Swipeable renderLeftActions={showDeleteButton}>
+    <Swipeable renderLeftActions={renderDeleteButton}>
       <View style={styles.destinationListItem}>
         <Text style={styles.destinationListItemNumber}>
           {index + 1}

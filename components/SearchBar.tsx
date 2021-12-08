@@ -1,8 +1,11 @@
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-import { SafeAreaView, View, Alert } from 'react-native'
-
-import SearchResults from '../components/SearchResults'
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Alert
+} from 'react-native'
 
 import constants from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
@@ -99,9 +102,11 @@ export default function SearchBar({
             language: 'en',
             components: 'country:nz'
           }}
+          renderRow={(details) =>
+            renderSearchResultRow(details)
+          }
         />
       </View>
-      <SearchResults />
     </SafeAreaView>
   )
 }
@@ -115,4 +120,23 @@ function getAddressComponentValue(
       return addressComponent.long_name
     }
   }
+}
+
+function renderSearchResultRow(details: any) {
+  const { main_text, secondary_text } =
+    details.structured_formatting
+
+  return (
+    <View style={styles.searchResultListItem}>
+      <Text style={styles.searchResultListItemAdd}>+</Text>
+      <View>
+        <Text style={styles.searchResultListItemText}>
+          {main_text}
+        </Text>
+        <Text style={styles.searchResultListItemText}>
+          {secondary_text}
+        </Text>
+      </View>
+    </View>
+  )
 }
