@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
@@ -6,18 +6,18 @@ import {
   SafeAreaView,
   View,
   Text,
-  Alert,
   TouchableOpacity,
-  Keyboard,
-  Platform
+  Keyboard
 } from 'react-native'
 
 import {
   GOOGLE_API_KEY,
-  LOCATIONS_LIMIT_MAX,
+  LOCATIONS_MAX,
   LATITUDE_DELTA,
   LONGITUDE_DELTA
 } from '../constants/constants'
+
+import renderAlert from './Alert'
 
 import {
   styles,
@@ -52,21 +52,20 @@ export default function SearchBar({
 
   function addLocation(newLocation: any) {
     const locationLimitReached =
-      locations.length >= LOCATIONS_LIMIT_MAX
+      locations.length >= LOCATIONS_MAX
 
     const locationAlreadyExists = locations.some(
       (location: any) => location.key === newLocation.key
     )
 
     if (locationLimitReached) {
-      triggerAlert(
+      renderAlert(
         'Hello',
-        'The current location limit is ' +
-          LOCATIONS_LIMIT_MAX,
+        'The current location limit is ' + LOCATIONS_MAX,
         'OK'
       )
     } else if (locationAlreadyExists) {
-      triggerAlert(
+      renderAlert(
         'Hello',
         'Location is already added, please select another location',
         'OK'
@@ -168,16 +167,6 @@ function SearchLeftButton({
       />
     </View>
   )
-}
-
-function triggerAlert(
-  mainText: string,
-  secondaryText: string,
-  buttonText: string
-) {
-  return Alert.alert(mainText, secondaryText, [
-    { text: buttonText }
-  ])
 }
 
 function constructLocationAndMapRegionData({
