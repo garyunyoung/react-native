@@ -21,6 +21,9 @@ export default function HomeScreen() {
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
 
+  const [isKeyboardVisible, setKeyboardVisible] =
+    useState(false)
+
   return (
     <View style={styles.container}>
       <Map
@@ -32,7 +35,9 @@ export default function HomeScreen() {
         locations={locations}
         setLocations={setLocations}
         setMapRegion={setMapRegion}
+        setKeyboardVisible={setKeyboardVisible}
       />
+
       {isDirectionsVisible ? (
         <Directions
           locations={locations}
@@ -46,6 +51,7 @@ export default function HomeScreen() {
           setIsDirectionsVisible={setIsDirectionsVisible}
         />
       )}
+
       <ExpoStatusBar style="auto" />
     </View>
   )

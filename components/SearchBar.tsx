@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import {
   SafeAreaView,
   View,
   Text,
   Alert,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard
 } from 'react-native'
 
 import constants from '../variables/constants'
@@ -24,7 +25,8 @@ const {
 export default function SearchBar({
   locations,
   setLocations,
-  setMapRegion
+  setMapRegion,
+  setKeyboardVisible
 }: any) {
   function addNewLocation(newLocation: any) {
     const locationLimitReached =
@@ -91,6 +93,26 @@ export default function SearchBar({
     setMapRegion(newMapRegion)
     addNewLocation(newLocation)
   }
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true)
+      }
+    )
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false)
+      }
+    )
+
+    return () => {
+      keyboardDidHideListener.remove()
+      keyboardDidShowListener.remove()
+    }
+  }, [])
 
   return (
     <SafeAreaView style={styles.header}>
