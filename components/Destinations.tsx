@@ -97,10 +97,10 @@ function DestinationListItem({
         </Text>
         <View>
           <Text style={styles.destinationListItemAddress}>
-            {location.address}
+            {location.mainText}
           </Text>
           <Text style={styles.destinationListItemCity}>
-            {location.city}
+            {location.secondaryText}
           </Text>
         </View>
       </View>

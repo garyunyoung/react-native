@@ -37,8 +37,8 @@ function DestinationListItem({ location, index }: any) {
     <View style={styles.listItem}>
       <Text style={styles.listItemNumber}>{index + 1}</Text>
       <View>
-        <Text>{location.address}</Text>
-        <Text>{location.city}</Text>
+        <Text>{location.mainText}</Text>
+        <Text>{location.secondaryText}</Text>
       </View>
     </View>
   )

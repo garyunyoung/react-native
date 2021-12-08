@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Ionicons } from '@expo/vector-icons'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import {
   SafeAreaView,
@@ -8,7 +9,6 @@ import {
   TouchableOpacity,
   Keyboard
 } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
 
 import constants from '../variables/constants'
 import {
@@ -28,9 +28,19 @@ export default function SearchBar({
   setLocations,
   setMapRegion,
   isKeyboardVisible,
-  setKeyboardVisible
+  setIsKeyboardVisible
 }: any) {
-  function addNewLocation(newLocation: any) {
+  function selectSearchResult(details: any, data: any) {
+    const { location, mapRegion } = locationAndMapData(
+      details,
+      data
+    )
+
+    setMapRegion(mapRegion)
+    addLocation(location)
+  }
+
+  function addLocation(newLocation: any) {
     const locationLimitReached =
       locations.length >= LOCATIONS_LIMIT_MAX
 
@@ -39,74 +49,34 @@ export default function SearchBar({
     )
 
     if (locationLimitReached) {
-      Alert.alert(
+      triggerAlert(
         'Hello',
         'The current location limit is ' +
           LOCATIONS_LIMIT_MAX,
-        [{ text: 'OK' }]
+        'OK'
       )
     } else if (locationAlreadyExists) {
-      Alert.alert(
+      triggerAlert(
         'Hello',
         'Location is already added, please select another location',
-        [{ text: 'OK' }]
+        'OK'
       )
     } else {
       setLocations([...locations, newLocation])
     }
   }
 
-  function handleOnPress(details: any) {
-    // TO DO: move this out of componenet - return object with new location and new map region
-    let key = details?.place_id
-    let streetNumber = getAddressComponentValue(
-      details,
-      'street_number'
-    )
-    let route = getAddressComponentValue(details, 'route')
-    let sublocality = getAddressComponentValue(
-      details,
-      'sublocality'
-    )
-    let locality = getAddressComponentValue(
-      details,
-      'locality'
-    )
-
-    const newLocation = {
-      key: key,
-      address: `${streetNumber} ${route}`,
-      city: `${sublocality} ${locality}`,
-      coordinates: {
-        latitude: details?.geometry.location.lat,
-        longitude: details?.geometry.location.lng,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA
-      }
-    }
-
-    const newMapRegion = {
-      latitude: details?.geometry.location.lat,
-      longitude: details?.geometry.location.lng,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA
-    }
-
-    setMapRegion(newMapRegion)
-    addNewLocation(newLocation)
-  }
-
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
-        setKeyboardVisible(true)
+        setIsKeyboardVisible(true)
       }
     )
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        setKeyboardVisible(false)
+        setIsKeyboardVisible(false)
       }
     )
 
@@ -118,7 +88,7 @@ export default function SearchBar({
 
   const dismissKeyboard = () => {
     Keyboard.dismiss()
-    setKeyboardVisible(false)
+    setIsKeyboardVisible(false)
   }
 
   return (
@@ -126,8 +96,8 @@ export default function SearchBar({
       <GooglePlacesAutocomplete
         placeholder="Search"
         fetchDetails={true}
-        onPress={(_data, details = null) =>
-          handleOnPress(details)
+        onPress={(data, details = null) =>
+          selectSearchResult(details, data)
         }
         query={{
           key: GOOGLE_API_KEY,
@@ -135,13 +105,15 @@ export default function SearchBar({
           components: 'country:nz'
         }}
         enablePoweredByContainer={false}
-        renderRow={(data) => renderSearchResultRow(data)}
-        renderLeftButton={() =>
-          renderSearchInputIcon(
-            isKeyboardVisible,
-            dismissKeyboard
-          )
-        }
+        renderRow={(data) => (
+          <SearchResultRow data={data} />
+        )}
+        renderLeftButton={() => (
+          <SearchInputIcon
+            isKeyboardVisible={isKeyboardVisible}
+            dismissKeyboard={dismissKeyboard}
+          />
+        )}
         suppressDefaultStyles={true}
         styles={searchResultStyles}
       />
@@ -149,21 +121,10 @@ export default function SearchBar({
   )
 }
 
-function getAddressComponentValue(
-  details: any,
-  field: string
-) {
-  for (let addressComponent of details?.address_components) {
-    if (addressComponent.types.includes(field)) {
-      return addressComponent.long_name
-    }
-  }
-}
-
-function renderSearchInputIcon(
-  isKeyboardVisible: boolean,
-  dismissKeyboard: any
-) {
+function SearchInputIcon({
+  isKeyboardVisible,
+  dismissKeyboard
+}: any) {
   return isKeyboardVisible ? (
     <View style={styles.searchInputLeftButton}>
       <Ionicons
@@ -184,7 +145,7 @@ function renderSearchInputIcon(
   )
 }
 
-function renderSearchResultRow(data: any) {
+function SearchResultRow({ data }: any) {
   const { main_text, secondary_text } =
     data.structured_formatting
 
@@ -215,4 +176,40 @@ function renderSearchResultRow(data: any) {
       </View>
     </View>
   )
+}
+
+function triggerAlert(
+  mainText: string,
+  secondaryText: string,
+  buttonText: string
+) {
+  return Alert.alert(mainText, secondaryText, [
+    { text: buttonText }
+  ])
+}
+
+function locationAndMapData(details: any, data: any) {
+  const { lat, lng } = details.geometry.location
+  const { main_text, secondary_text } =
+    data.structured_formatting
+
+  return {
+    location: {
+      key: details.place_id,
+      mainText: main_text,
+      secondaryText: secondary_text,
+      coordinates: {
+        latitude: lat,
+        longitude: lng,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      }
+    },
+    mapRegion: {
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA
+    }
+  }
 }

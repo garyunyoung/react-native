@@ -21,7 +21,7 @@ export default function HomeScreen() {
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
 
-  const [isKeyboardVisible, setKeyboardVisible] =
+  const [isKeyboardVisible, setIsKeyboardVisible] =
     useState(false)
 
   return (
@@ -36,7 +36,7 @@ export default function HomeScreen() {
         setLocations={setLocations}
         setMapRegion={setMapRegion}
         isKeyboardVisible={isKeyboardVisible}
-        setKeyboardVisible={setKeyboardVisible}
+        setIsKeyboardVisible={setIsKeyboardVisible}
       />
 
       {isDirectionsVisible ? (
