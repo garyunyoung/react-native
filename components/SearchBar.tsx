@@ -17,7 +17,7 @@ import {
 import {
   styles,
   googlePlacesAutocomplete
-} from '../styles/SearchBarStyle'
+} from '../styles/SearchStyle'
 
 export default function SearchBar(props: any) {
   function handleSearchResult(data: any, details: any) {

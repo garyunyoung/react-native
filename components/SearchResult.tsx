@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { styles } from '../styles/SearchBarStyle'
+import { styles } from '../styles/SearchStyle'
 
 export default function SearchResult({ title, body }: any) {
   return (
