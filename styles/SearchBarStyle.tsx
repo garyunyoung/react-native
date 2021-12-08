@@ -5,10 +5,9 @@ import {
 } from 'react-native'
 
 import { ANDROID } from '../constants/constants'
-
 import { colours, sizes } from '../constants/theme'
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     position: 'absolute',
     top:
@@ -68,3 +67,35 @@ export const styles = StyleSheet.create({
     marginRight: 8
   }
 })
+
+const googlePlacesAutocomplete = {
+  textInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+
+    backgroundColor: 'white',
+
+    borderRadius: 40,
+    borderWidth: 0.5,
+    borderColor: 'lightgray',
+
+    paddingRight: 8,
+    marginHorizontal: 16,
+    marginBottom: 16
+  },
+
+  textInput: {
+    fontSize: 16,
+    flexGrow: 1,
+
+    paddingVertical: 16,
+    paddingRight: 16
+  },
+
+  listView: {
+    width: sizes.width,
+    backgroundColor: 'white'
+  }
+}
+
+export { styles, googlePlacesAutocomplete }

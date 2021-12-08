@@ -2,15 +2,9 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
-import {
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-  Keyboard
-} from 'react-native'
-
+import { SafeAreaView, View, Keyboard } from 'react-native'
 import renderAlert from './Alert'
+import SearchResult from './SearchResult'
 
 import {
   GOOGLE_API_KEY,
@@ -20,7 +14,10 @@ import {
   SEARCH_RESULTS_LANGUAGE,
   SEARCH_RESULTS_REGION
 } from '../constants/constants'
-import { styles } from '../styles/SearchBarStyle'
+import {
+  styles,
+  googlePlacesAutocomplete
+} from '../styles/SearchBarStyle'
 
 export default function SearchBar(props: any) {
   function handleSearchResult(data: any, details: any) {
@@ -83,11 +80,9 @@ export default function SearchBar(props: any) {
           handleSearchResult(data, details)
         }
         renderRow={(data) => (
-          <SearchResultRow
-            mainText={data.structured_formatting.main_text}
-            secondaryText={
-              data.structured_formatting.secondary_text
-            }
+          <SearchResult
+            title={data.structured_formatting.main_text}
+            body={data.structured_formatting.secondary_text}
           />
         )}
         renderLeftButton={() => (
@@ -98,29 +93,9 @@ export default function SearchBar(props: any) {
         )}
         suppressDefaultStyles={true}
         enablePoweredByContainer={false}
+        styles={googlePlacesAutocomplete}
       />
     </SafeAreaView>
-  )
-}
-
-function SearchResultRow({ mainText, secondaryText }: any) {
-  return (
-    <View style={styles.listItem}>
-      <TouchableOpacity style={styles.addButton}>
-        <Text style={styles.addButtonText}>+</Text>
-      </TouchableOpacity>
-      <View style={styles.listItemTextContainer}>
-        <Text
-          style={styles.listItemTitle}
-          numberOfLines={1}
-        >
-          {mainText}
-        </Text>
-        <Text style={styles.listItemBody} numberOfLines={1}>
-          {secondaryText}
-        </Text>
-      </View>
-    </View>
   )
 }
 
