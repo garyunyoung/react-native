@@ -1,7 +1,6 @@
 import React from 'react'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import {
-  StyleSheet,
   View,
   Text,
   FlatList,
@@ -15,7 +14,7 @@ import {
   DEFAULT_MAP_REGION
 } from '../constants/constants'
 
-import { colours, fonts, sizes } from '../constants/theme'
+import { styles } from '../styles/SharedStyle'
 
 export default function Destinations(props: any) {
   function showDirections() {
@@ -36,20 +35,18 @@ export default function Destinations(props: any) {
           show directions
         </Text>
       </View>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={props.locations}
-          renderItem={({ item, index }) => (
-            <DestinationListItem
-              location={item}
-              index={index}
-              existingLocations={props.locations}
-              setLocations={props.setLocations}
-              setMapRegion={props.setMapRegion}
-            />
-          )}
-        />
-      </View>
+      <FlatList
+        data={props.locations}
+        renderItem={({ item, index }) => (
+          <DestinationListItem
+            location={item}
+            index={index}
+            existingLocations={props.locations}
+            setLocations={props.setLocations}
+            setMapRegion={props.setMapRegion}
+          />
+        )}
+      />
     </View>
   )
 }
@@ -102,79 +99,3 @@ function DestinationListItem(props: any) {
     </Swipeable>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-
-  headingContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'lightgray',
-
-    paddingHorizontal: sizes.paddingHorizontalEdge,
-    paddingVertical: 16
-  },
-
-  headingText: {
-    fontSize: fonts.h1.fontSize,
-    fontWeight: 'bold',
-    color: fonts.h1.color
-  },
-
-  listContainer: {
-    flex: 1
-  },
-
-  listItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-
-    paddingVertical: 16,
-    paddingHorizontal: sizes.paddingHorizontalEdge
-  },
-
-  listItemTitle: {
-    fontSize: fonts.title.fontSize,
-    fontWeight: 'bold',
-    color: fonts.title.color,
-
-    marginBottom: 2
-  },
-
-  listItemBody: {
-    fontSize: fonts.body.fontSize,
-    fontWeight: 'normal',
-    color: fonts.body.color
-  },
-
-  deleteButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    backgroundColor: colours.errorRed,
-    paddingHorizontal: 24
-  },
-
-  deleteButtonText: {
-    fontSize: fonts.button.fontSize,
-    fontWeight: 'bold',
-    color: 'white'
-  },
-
-  listItemIndex: {
-    fontSize: 16,
-    fontWeight: 'bold',
-
-    backgroundColor: 'lightgray',
-
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    marginRight: 24
-  }
-})

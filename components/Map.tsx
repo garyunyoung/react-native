@@ -1,12 +1,12 @@
 import React from 'react'
+import MapViewDirections from 'react-native-maps-directions'
 import MapView, {
   PROVIDER_GOOGLE,
   Marker
 } from 'react-native-maps'
-import MapViewDirections from 'react-native-maps-directions'
 
 import { GOOGLE_API_KEY } from '../constants/constants'
-import { styles } from '../styles/HomeScreenStyle'
+import { styles } from '../styles/MapStyle'
 
 export default function Map({
   locations,

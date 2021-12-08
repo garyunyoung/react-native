@@ -10,6 +10,8 @@ import {
   Keyboard
 } from 'react-native'
 
+import renderAlert from './Alert'
+
 import {
   GOOGLE_API_KEY,
   LOCATIONS_MAX,
@@ -18,13 +20,7 @@ import {
   SEARCH_RESULTS_LANGUAGE,
   SEARCH_RESULTS_REGION
 } from '../constants/constants'
-
-import renderAlert from './Alert'
-
-import {
-  styles,
-  searchResultStyles
-} from '../styles/HomeScreenStyle'
+import { styles } from '../styles/SearchBarStyle'
 
 export default function SearchBar(props: any) {
   function handleSearchResult(data: any, details: any) {
@@ -70,7 +66,6 @@ export default function SearchBar(props: any) {
 
   const dismissKeyboard = () => {
     Keyboard.dismiss()
-    //
     props.setIsKeyboardVisible(false)
   }
 
@@ -103,7 +98,6 @@ export default function SearchBar(props: any) {
         )}
         suppressDefaultStyles={true}
         enablePoweredByContainer={false}
-        styles={searchResultStyles}
       />
     </SafeAreaView>
   )
@@ -111,27 +105,18 @@ export default function SearchBar(props: any) {
 
 function SearchResultRow({ mainText, secondaryText }: any) {
   return (
-    <View style={styles.searchResultListItem}>
-      <TouchableOpacity
-        style={styles.searchResultListItemAdd}
-      >
-        <Text style={styles.searchResultListItemAddText}>
-          +
-        </Text>
+    <View style={styles.listItem}>
+      <TouchableOpacity style={styles.addButton}>
+        <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
-      <View
-        style={styles.searchResultListItemTextContainer}
-      >
+      <View style={styles.listItemTextContainer}>
         <Text
-          style={styles.searchResultListItemMainText}
+          style={styles.listItemTitle}
           numberOfLines={1}
         >
           {mainText}
         </Text>
-        <Text
-          style={styles.searchResultListItemSecondaryText}
-          numberOfLines={1}
-        >
+        <Text style={styles.listItemBody} numberOfLines={1}>
           {secondaryText}
         </Text>
       </View>
@@ -140,22 +125,22 @@ function SearchResultRow({ mainText, secondaryText }: any) {
 }
 
 function SearchLeftButton(props: any) {
-  return props.isKeyboardVisible ? (
-    <View style={styles.searchInputLeftButton}>
-      <Ionicons
-        name="md-chevron-back"
-        size={32}
-        color="black"
-        onPress={props.dismissKeyboard}
-      />
-    </View>
-  ) : (
-    <View style={styles.searchInputLeftButton}>
-      <Ionicons
-        name="md-search-outline"
-        size={24}
-        color="gray"
-      />
+  return (
+    <View style={styles.searchLeftButton}>
+      {props.isKeyboardVisible ? (
+        <Ionicons
+          onPress={props.dismissKeyboard}
+          name="md-chevron-back"
+          size={32}
+          color="black"
+        />
+      ) : (
+        <Ionicons
+          name="md-search-outline"
+          size={24}
+          color="gray"
+        />
+      )}
     </View>
   )
 }

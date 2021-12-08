@@ -1,15 +1,14 @@
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
-
-import { styles } from '../styles/HomeScreenStyle'
+import { styles } from '../styles/SharedStyle'
 
 export default function Directions({
   locations,
   setIsDirectionsVisible
 }: any) {
   return (
-    <View>
-      <View style={styles.heading}>
+    <View style={styles.container}>
+      <View style={styles.headingContainer}>
         <Text style={styles.headingText}>Directions</Text>
         <Text
           onPress={() => {
@@ -35,10 +34,14 @@ export default function Directions({
 function DestinationListItem({ location, index }: any) {
   return (
     <View style={styles.listItem}>
-      <Text style={styles.listItemNumber}>{index + 1}</Text>
+      <Text style={styles.listItemIndex}>{index + 1}</Text>
       <View>
-        <Text>{location.mainText}</Text>
-        <Text>{location.secondaryText}</Text>
+        <Text style={styles.listItemTitle}>
+          {location.mainText}
+        </Text>
+        <Text style={styles.listItemBody}>
+          {location.secondaryText}
+        </Text>
       </View>
     </View>
   )

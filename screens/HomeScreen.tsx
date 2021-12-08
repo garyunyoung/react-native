@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
-import { View, Keyboard } from 'react-native'
+import { StyleSheet, View, Keyboard } from 'react-native'
 
 import Map from '../components/Map'
 import SearchBar from '../components/SearchBar'
@@ -8,7 +8,6 @@ import Destinations from '../components/Destinations'
 import Directions from '../components/Directions'
 
 import { DEFAULT_MAP_REGION } from '../constants/constants'
-import { styles } from '../styles/HomeScreenStyle'
 
 export default function HomeScreen() {
   const [locations, setLocations] = useState([])
@@ -75,3 +74,11 @@ export default function HomeScreen() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    position: 'relative'
+  }
+})
