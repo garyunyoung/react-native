@@ -7,10 +7,8 @@ import SearchBar from '../components/SearchBar'
 import Destinations from '../components/Destinations'
 import Directions from '../components/Directions'
 
-import constants from '../variables/constants'
+import { AUCKLAND_MAP_REGION } from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
-
-const { AUCKLAND_MAP_REGION } = constants
 
 export default function HomeScreen() {
   const [locations, setLocations] = useState([])

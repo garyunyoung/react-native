@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
+
 import {
   SafeAreaView,
   View,
@@ -10,18 +11,17 @@ import {
   Keyboard
 } from 'react-native'
 
-import constants from '../variables/constants'
 import {
-  styles,
-  searchResultStyles
-} from '../styles/HomeScreenStyle'
-
-const {
   GOOGLE_API_KEY,
   LOCATIONS_LIMIT_MAX,
   LATITUDE_DELTA,
   LONGITUDE_DELTA
-} = constants
+} from '../variables/constants'
+
+import {
+  styles,
+  searchResultStyles
+} from '../styles/HomeScreenStyle'
 
 export default function SearchBar({
   locations,

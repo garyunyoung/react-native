@@ -5,10 +5,8 @@ import MapView, {
 } from 'react-native-maps'
 import MapViewDirections from 'react-native-maps-directions'
 
-import constants from '../variables/constants'
+import { GOOGLE_API_KEY } from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
-
-const { GOOGLE_API_KEY } = constants
 
 export default function Map({
   locations,

@@ -4,7 +4,7 @@ import {
   StatusBar
 } from 'react-native'
 
-import CONSTANTS from '../variables/constants'
+import { ANDROID } from '../variables/constants'
 import { height, width, COLOURS } from '../variables/theme'
 
 export const styles = StyleSheet.create({
@@ -17,9 +17,7 @@ export const styles = StyleSheet.create({
   header: {
     position: 'absolute',
     top:
-      Platform.OS === CONSTANTS.ANDROID
-        ? StatusBar.currentHeight
-        : 0,
+      Platform.OS === ANDROID ? StatusBar.currentHeight : 0,
     width: width
   },
 

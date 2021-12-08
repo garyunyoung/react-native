@@ -8,11 +8,12 @@ import {
 } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 
-import constants from '../variables/constants'
-import { styles } from '../styles/Destinations'
+import {
+  LOCATIONS_LIMIT_MIN,
+  AUCKLAND_MAP_REGION
+} from '../variables/constants'
 
-const { LOCATIONS_LIMIT_MIN, AUCKLAND_MAP_REGION } =
-  constants
+import { styles } from '../styles/Destinations'
 
 export default function Destinations({
   locations,
