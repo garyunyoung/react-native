@@ -26,17 +26,8 @@ import {
   searchResultStyles
 } from '../styles/HomeScreenStyle'
 
-export default function SearchBar({
-  locations,
-  setLocations,
-  setMapRegion,
-  isKeyboardVisible,
-  setIsKeyboardVisible
-}: any) {
-  function handleSearchResultOnPress(
-    data: any,
-    details: any
-  ) {
+export default function SearchBar(props: any) {
+  function handleSearchResult(data: any, details: any) {
     const locationData = {
       id: data.place_id,
       lat: details?.geometry.location.lat,
@@ -48,15 +39,15 @@ export default function SearchBar({
     const { location, mapRegion } =
       constructLocationAndMapRegionData(locationData)
 
-    setMapRegion(mapRegion)
+    props.setMapRegion(mapRegion)
     addLocation(location)
   }
 
   function addLocation(newLocation: any) {
     const locationLimitReached =
-      locations.length >= LOCATIONS_MAX
+      props.locations.length >= LOCATIONS_MAX
 
-    const locationAlreadyExists = locations.some(
+    const locationAlreadyExists = props.locations.some(
       (location: any) => location.key === newLocation.key
     )
 
@@ -73,13 +64,14 @@ export default function SearchBar({
         'OK'
       )
     } else {
-      setLocations([...locations, newLocation])
+      props.setLocations([...props.locations, newLocation])
     }
   }
 
   const dismissKeyboard = () => {
     Keyboard.dismiss()
-    setIsKeyboardVisible(false)
+    //
+    props.setIsKeyboardVisible(false)
   }
 
   return (
@@ -93,7 +85,7 @@ export default function SearchBar({
         }}
         fetchDetails={true}
         onPress={(data, details = null) =>
-          handleSearchResultOnPress(data, details)
+          handleSearchResult(data, details)
         }
         renderRow={(data) => (
           <SearchResultRow
@@ -105,7 +97,7 @@ export default function SearchBar({
         )}
         renderLeftButton={() => (
           <SearchLeftButton
-            isKeyboardVisible={isKeyboardVisible}
+            isKeyboardVisible={props.isKeyboardVisible}
             dismissKeyboard={dismissKeyboard}
           />
         )}
@@ -147,17 +139,14 @@ function SearchResultRow({ mainText, secondaryText }: any) {
   )
 }
 
-function SearchLeftButton({
-  isKeyboardVisible,
-  dismissKeyboard
-}: any) {
-  return isKeyboardVisible ? (
+function SearchLeftButton(props: any) {
+  return props.isKeyboardVisible ? (
     <View style={styles.searchInputLeftButton}>
       <Ionicons
         name="md-chevron-back"
         size={32}
         color="black"
-        onPress={dismissKeyboard}
+        onPress={props.dismissKeyboard}
       />
     </View>
   ) : (
