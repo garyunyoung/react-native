@@ -2,6 +2,8 @@ import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { SafeAreaView, View, Alert } from 'react-native'
 
+import SearchResults from '../components/SearchResults'
+
 import constants from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
@@ -99,6 +101,7 @@ export default function SearchBar({
           }}
         />
       </View>
+      <SearchResults />
     </SafeAreaView>
   )
 }
