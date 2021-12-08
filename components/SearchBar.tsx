@@ -60,16 +60,16 @@ export default function SearchBar({
       coordinates: {
         latitude: details?.geometry.location.lat,
         longitude: details?.geometry.location.lng,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
+        latitudeDelta: CONSTANTS.LATITUDE_DELTA,
+        longitudeDelta: CONSTANTS.LONGITUDE_DELTA
       }
     }
 
     const newMapRegion = {
       latitude: details?.geometry.location.lat,
       longitude: details?.geometry.location.lng,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421
+      latitudeDelta: CONSTANTS.LATITUDE_DELTA,
+      longitudeDelta: CONSTANTS.LONGITUDE_DELTA
     }
 
     setMapRegion(newMapRegion)
