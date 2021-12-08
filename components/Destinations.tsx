@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, FlatList, Alert } from 'react-native'
 
 import CONSTANTS from '../variables/constants'
-import { styles } from '../styles/HomeScreenStyle'
+import { styles } from '../styles/Destinations'
 
 export default function Destinations({
   locations,
@@ -10,41 +10,36 @@ export default function Destinations({
   setMapRegion,
   setIsDirectionsVisible
 }) {
-  const needsMoreLocations =
+  const notEnoughLocations =
     locations.length < CONSTANTS.LOCATIONS_LIMIT_MIN
 
+  const showDirections = () =>
+    notEnoughLocations
+      ? triggerAlert()
+      : setIsDirectionsVisible(true)
+
   return (
-    <View>
+    <View style={styles.destinations}>
       <View style={styles.heading}>
         <Text style={styles.headingText}>Destinations</Text>
-        <Text
-          onPress={() => {
-            if (needsMoreLocations) {
-              Alert.alert(
-                'Hello',
-                `'You need at least ${CONSTANTS.LOCATIONS_LIMIT_MIN} locations, please add another location'`,
-                [{ text: 'OK' }]
-              )
-            } else {
-              setIsDirectionsVisible(true)
-            }
-          }}
-        >
+        <Text onPress={showDirections}>
           show directions
         </Text>
       </View>
-      <FlatList
-        data={locations}
-        renderItem={({ item, index }) => (
-          <DestinationListItem
-            location={item}
-            index={index}
-            existingLocations={locations}
-            setLocations={setLocations}
-            setMapRegion={setMapRegion}
-          />
-        )}
-      />
+      <View style={styles.destinationsList}>
+        <FlatList
+          data={locations}
+          renderItem={({ item, index }) => (
+            <DestinationListItem
+              location={item}
+              index={index}
+              existingLocations={locations}
+              setLocations={setLocations}
+              setMapRegion={setMapRegion}
+            />
+          )}
+        />
+      </View>
     </View>
   )
 }
@@ -72,18 +67,32 @@ function DestinationListItem({
   }
 
   return (
-    <View style={styles.listItem}>
+    <View style={styles.destinationListItem}>
       <Text
-        style={styles.listItemDelete}
+        style={styles.destinationListItemDelete}
         onPress={() => removeLocation(location.key)}
       >
         X
       </Text>
-      <Text style={styles.listItemNumber}>{index + 1}</Text>
+      <Text style={styles.destinationListItemNumber}>
+        {index + 1}
+      </Text>
       <View>
-        <Text>{location.address}</Text>
-        <Text>{location.city}</Text>
+        <Text style={styles.destinationListItemAddress}>
+          {location.address}
+        </Text>
+        <Text style={styles.destinationListItemCity}>
+          {location.city}
+        </Text>
       </View>
     </View>
+  )
+}
+
+function triggerAlert() {
+  Alert.alert(
+    'Hello',
+    `'You need at least ${CONSTANTS.LOCATIONS_LIMIT_MIN} locations, please add another location'`,
+    [{ text: 'OK' }]
   )
 }
