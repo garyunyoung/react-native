@@ -35,11 +35,14 @@ function DestinationListItem({ location, index }: any) {
   return (
     <View style={styles.listItem}>
       <Text style={styles.listItemIndex}>{index + 1}</Text>
-      <View>
-        <Text style={styles.listItemTitle}>
+      <View style={styles.listItemTextContainer}>
+        <Text
+          style={styles.listItemTitle}
+          numberOfLines={1}
+        >
           {location.mainText}
         </Text>
-        <Text style={styles.listItemBody}>
+        <Text style={styles.listItemBody} numberOfLines={1}>
           {location.secondaryText}
         </Text>
       </View>

@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 
 import { ANDROID } from '../constants/constants'
-import { colours, sizes } from '../constants/theme'
+import { colours, fonts, sizes } from '../constants/theme'
 
 const styles = StyleSheet.create({
   header: {
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   },
 
   addButton: {
-    width: 44,
-    height: 44,
+    width: sizes.button,
+    height: sizes.button,
 
     justifyContent: 'center',
     alignItems: 'center',
@@ -45,26 +45,23 @@ const styles = StyleSheet.create({
   },
 
   listItemTitle: {
-    flex: 1,
-    fontSize: 16,
+    fontSize: fonts.title.fontSize,
     fontWeight: 'bold',
+    color: fonts.title.color,
+
     marginBottom: 2
   },
 
   listItemBody: {
-    flex: 1,
-    fontSize: 14,
-    color: 'gray'
+    fontSize: fonts.body.fontSize,
+    fontWeight: 'normal',
+    color: fonts.body.color
   },
 
   searchLeftButton: {
-    width: 44,
-    height: 44,
-
+    width: sizes.button,
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 8,
-    marginRight: 8
+    alignItems: 'center'
   }
 })
 
@@ -79,17 +76,15 @@ const googlePlacesAutocomplete = {
     borderWidth: 0.5,
     borderColor: 'lightgray',
 
-    paddingRight: 8,
-    marginHorizontal: 16,
-    marginBottom: 16
+    marginHorizontal: 16
   },
 
   textInput: {
     fontSize: 16,
-    flexGrow: 1,
-
-    paddingVertical: 16,
-    paddingRight: 16
+    width:
+      sizes.width -
+      (sizes.paddingHorizontalEdge * 2 + sizes.button + 8),
+    paddingVertical: 16
   },
 
   listView: {

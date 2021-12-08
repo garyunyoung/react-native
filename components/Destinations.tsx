@@ -7,7 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import renderAlert from './Alert'
+import triggerAlert from './Alert'
 
 import {
   LOCATIONS_MIN,
@@ -19,7 +19,7 @@ import { styles } from '../styles/SharedStyle'
 export default function Destinations(props: any) {
   function showDirections() {
     props.locations.length < LOCATIONS_MIN
-      ? renderAlert(
+      ? triggerAlert(
           'Hello',
           `'You need at least ${LOCATIONS_MIN}, locations, please add another location'`,
           'OK'
@@ -87,11 +87,17 @@ function DestinationListItem(props: any) {
         <Text style={styles.listItemIndex}>
           {props.index + 1}
         </Text>
-        <View>
-          <Text style={styles.listItemTitle}>
+        <View style={styles.listItemTextContainer}>
+          <Text
+            style={styles.listItemTitle}
+            numberOfLines={1}
+          >
             {props.location.mainText}
           </Text>
-          <Text style={styles.listItemBody}>
+          <Text
+            style={styles.listItemBody}
+            numberOfLines={1}
+          >
             {props.location.secondaryText}
           </Text>
         </View>

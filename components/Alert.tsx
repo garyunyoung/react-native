@@ -1,6 +1,6 @@
 import { Alert as ReactAlert } from 'react-native'
 
-export default function renderAlert(
+export default function triggerAlert(
   title: string,
   body: string,
   button: string

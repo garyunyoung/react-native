@@ -71,7 +71,7 @@ export default function HomeScreen() {
         />
       )}
 
-      <ExpoStatusBar style="auto" />
+      <ExpoStatusBar style="dark" />
     </View>
   )
 }

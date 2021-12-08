@@ -34,6 +34,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: sizes.paddingHorizontalEdge
   },
 
+  listItemTextContainer: {
+    maxWidth: sizes.width - 100
+  },
+
   listItemTitle: {
     fontSize: fonts.title.fontSize,
     fontWeight: 'bold',

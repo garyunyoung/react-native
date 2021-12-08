@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
 import { SafeAreaView, View, Keyboard } from 'react-native'
-import renderAlert from './Alert'
+import triggerAlert from './Alert'
 import SearchResult from './SearchResult'
 
 import {
@@ -45,13 +45,13 @@ export default function SearchBar(props: any) {
     )
 
     if (locationLimitReached) {
-      renderAlert(
+      triggerAlert(
         'Hello',
         'The current location limit is ' + LOCATIONS_MAX,
         'OK'
       )
     } else if (locationAlreadyExists) {
-      renderAlert(
+      triggerAlert(
         'Hello',
         'Location is already added, please select another location',
         'OK'

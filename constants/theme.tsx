@@ -4,6 +4,7 @@ const sizes = {
   height: Dimensions.get('window').height,
   width: Dimensions.get('window').width,
 
+  button: 44,
   paddingHorizontalEdge: 16
 }
 
