@@ -8,6 +8,7 @@ import Destinations from '../components/Destinations'
 import Directions from '../components/Directions'
 
 import { DEFAULT_MAP_REGION } from '../constants/constants'
+import { styles } from '../styles/HomeScreenStyle'
 
 export default function HomeScreen() {
   const [locations, setLocations] = useState([])
@@ -74,11 +75,3 @@ export default function HomeScreen() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    position: 'relative'
-  }
-})
