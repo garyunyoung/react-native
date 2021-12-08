@@ -30,11 +30,20 @@ export default function SearchBar({
   isKeyboardVisible,
   setIsKeyboardVisible
 }: any) {
-  function selectSearchResult(details: any, data: any) {
-    const { location, mapRegion } = locationAndMapData(
-      details,
-      data
-    )
+  function handleSearchResultOnPress(
+    data: any,
+    details: any
+  ) {
+    const locationData = {
+      id: data.place_id,
+      lat: details?.geometry.location.lat,
+      lng: details?.geometry.location.lng,
+      mainText: data.structured_formatting.main_text,
+      secondaryText:
+        data.structured_formatting.secondary_text
+    }
+    const { location, mapRegion } =
+      constructLocationAndMapRegionData(locationData)
 
     setMapRegion(mapRegion)
     addLocation(location)
@@ -97,7 +106,7 @@ export default function SearchBar({
         placeholder="Search"
         fetchDetails={true}
         onPress={(data, details = null) =>
-          selectSearchResult(details, data)
+          handleSearchResultOnPress(data, details)
         }
         query={{
           key: GOOGLE_API_KEY,
@@ -188,16 +197,18 @@ function triggerAlert(
   ])
 }
 
-function locationAndMapData(details: any, data: any) {
-  const { lat, lng } = details.geometry.location
-  const { main_text, secondary_text } =
-    data.structured_formatting
-
+function constructLocationAndMapRegionData({
+  id,
+  lat,
+  lng,
+  mainText,
+  secondaryText
+}: any) {
   return {
     location: {
-      key: details.place_id,
-      mainText: main_text,
-      secondaryText: secondary_text,
+      key: id,
+      mainText: mainText,
+      secondaryText: secondaryText,
       coordinates: {
         latitude: lat,
         longitude: lng,
