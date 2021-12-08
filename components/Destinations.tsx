@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, FlatList, Alert } from 'react-native'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
 
 import CONSTANTS from '../variables/constants'
 import { styles } from '../styles/Destinations'
@@ -66,26 +67,35 @@ function DestinationListItem({
     setMapRegion(lastLocation)
   }
 
-  return (
-    <View style={styles.destinationListItem}>
-      <Text
-        style={styles.destinationListItemDelete}
-        onPress={() => removeLocation(location.key)}
-      >
-        X
-      </Text>
-      <Text style={styles.destinationListItemNumber}>
-        {index + 1}
-      </Text>
-      <View>
-        <Text style={styles.destinationListItemAddress}>
-          {location.address}
-        </Text>
-        <Text style={styles.destinationListItemCity}>
-          {location.city}
+  const SwipeLeftAction = () => {
+    return (
+      <View style={styles.destinationListItemDelete}>
+        <Text
+          style={styles.destinationListItemDeleteText}
+          onPress={() => removeLocation(location.key)}
+        >
+          DELETE
         </Text>
       </View>
-    </View>
+    )
+  }
+
+  return (
+    <Swipeable renderLeftActions={SwipeLeftAction}>
+      <View style={styles.destinationListItem}>
+        <Text style={styles.destinationListItemNumber}>
+          {index + 1}
+        </Text>
+        <View>
+          <Text style={styles.destinationListItemAddress}>
+            {location.address}
+          </Text>
+          <Text style={styles.destinationListItemCity}>
+            {location.city}
+          </Text>
+        </View>
+      </View>
+    </Swipeable>
   )
 }
 

@@ -1,11 +1,5 @@
-import {
-  Platform,
-  StyleSheet,
-  StatusBar
-} from 'react-native'
-
-import CONSTANTS from '../variables/constants'
-import { height, width } from '../variables/theme'
+import { StyleSheet } from 'react-native'
+import { COLOURS } from '../variables/theme'
 
 export const styles = StyleSheet.create({
   destinations: {
@@ -36,6 +30,7 @@ export const styles = StyleSheet.create({
   destinationListItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
 
     paddingVertical: 16,
     paddingHorizontal: 16
@@ -53,8 +48,18 @@ export const styles = StyleSheet.create({
   },
 
   destinationListItemDelete: {
-    marginRight: 16,
-    color: 'red'
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    backgroundColor: COLOURS.errorRed,
+
+    paddingHorizontal: 24
+  },
+
+  destinationListItemDeleteText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white'
   },
 
   destinationListItemNumber: {
