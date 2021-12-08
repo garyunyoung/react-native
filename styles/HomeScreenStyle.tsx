@@ -10,7 +10,8 @@ import { height, width, COLOURS } from '../variables/theme'
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    position: 'relative'
   },
 
   header: {
@@ -19,27 +20,12 @@ export const styles = StyleSheet.create({
       Platform.OS === CONSTANTS.ANDROID
         ? StatusBar.currentHeight
         : 0,
-    left: 0,
-    right: 0,
-
-    marginHorizontal: 16
-  },
-
-  searchBar: {
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // backgroundColor: 'white',
-    // paddingHorizontal: 16,
-    // borderRadius: 50,
-    // borderWidth: 1,
-    // borderColor: 'lightgray',
-    // position: 'relative'
+    width: width
   },
 
   map: {
     height: height * 0.5,
-    width: width,
-    backgroundColor: 'lightblue'
+    width: width
   },
 
   heading: {
@@ -76,15 +62,10 @@ export const styles = StyleSheet.create({
     marginRight: 16
   },
 
-  // searchResultsContainer: {
-  //   backgroundColor: 'white'
-  // },
-
   searchResultListItem: {
     flexDirection: 'row',
     alignItems: 'center',
-
-    backgroundColor: 'white'
+    padding: 16
   },
 
   searchResultListItemAdd: {
@@ -106,18 +87,46 @@ export const styles = StyleSheet.create({
     color: 'white'
   },
 
+  searchResultListItemTextContainer: {
+    maxWidth: width - 100
+  },
+
   searchResultListItemMainText: {
+    flex: 1,
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 2
   },
 
   searchResultListItemSecondaryText: {
+    flex: 1,
     fontSize: 14,
     color: 'gray'
   }
 })
 
-export const searchResultStyles = StyleSheet.create({
-  container: {}
-})
+export const searchResultStyles = {
+  container: {},
+
+  textInputContainer: {
+    marginHorizontal: 16,
+    marginBottom: 16
+  },
+
+  textInput: {
+    fontSize: 16,
+
+    backgroundColor: 'white',
+
+    borderRadius: 40,
+    borderWidth: 0.5,
+    borderColor: 'lightgray',
+
+    padding: 16
+  },
+
+  listView: {
+    width: width,
+    backgroundColor: 'white'
+  }
+}

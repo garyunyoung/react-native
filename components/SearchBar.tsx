@@ -94,23 +94,22 @@ export default function SearchBar({
 
   return (
     <SafeAreaView style={styles.header}>
-      <View style={styles.searchBar}>
-        <GooglePlacesAutocomplete
-          placeholder="Search"
-          fetchDetails={true}
-          onPress={(_data, details = null) =>
-            handleOnPress(details)
-          }
-          query={{
-            key: GOOGLE_API_KEY,
-            language: 'en',
-            components: 'country:nz'
-          }}
-          enablePoweredByContainer={false}
-          renderRow={(data) => renderSearchResultRow(data)}
-          styles={searchResultStyles}
-        />
-      </View>
+      <GooglePlacesAutocomplete
+        placeholder="Search"
+        fetchDetails={true}
+        onPress={(_data, details = null) =>
+          handleOnPress(details)
+        }
+        query={{
+          key: GOOGLE_API_KEY,
+          language: 'en',
+          components: 'country:nz'
+        }}
+        enablePoweredByContainer={false}
+        renderRow={(data) => renderSearchResultRow(data)}
+        suppressDefaultStyles={true}
+        styles={searchResultStyles}
+      />
     </SafeAreaView>
   )
 }
@@ -139,12 +138,18 @@ function renderSearchResultRow(data: any) {
           +
         </Text>
       </TouchableOpacity>
-      <View>
-        <Text style={styles.searchResultListItemMainText}>
+      <View
+        style={styles.searchResultListItemTextContainer}
+      >
+        <Text
+          style={styles.searchResultListItemMainText}
+          numberOfLines={1}
+        >
           {main_text}
         </Text>
         <Text
           style={styles.searchResultListItemSecondaryText}
+          numberOfLines={1}
         >
           {secondary_text}
         </Text>
