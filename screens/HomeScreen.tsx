@@ -15,6 +15,7 @@ export default function HomeScreen() {
   const [mapRegion, setMapRegion] = useState(
     CONSTANTS.AUCKLAND_MAP_REGION
   )
+
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
 
@@ -40,6 +41,7 @@ export default function HomeScreen() {
         <Destinations
           locations={locations}
           setLocations={setLocations}
+          setMapRegion={setMapRegion}
           setIsDirectionsVisible={setIsDirectionsVisible}
         />
       )}

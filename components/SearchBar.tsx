@@ -59,7 +59,9 @@ export default function SearchBar({
       city: `${sublocality} ${locality}`,
       coordinates: {
         latitude: details?.geometry.location.lat,
-        longitude: details?.geometry.location.lng
+        longitude: details?.geometry.location.lng,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
       }
     }
 
@@ -84,7 +86,7 @@ export default function SearchBar({
             handleOnPress(details)
           }
           query={{
-            key: CONSTANTS.GOOGLE_PLACES_API_KEY,
+            key: CONSTANTS.GOOGLE_API_KEY,
             language: 'en',
             components: 'country:nz'
           }}

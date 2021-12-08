@@ -16,7 +16,7 @@ export default function Map({
   return (
     <MapView
       style={styles.map}
-      initialRegion={mapRegion}
+      region={mapRegion}
       provider={PROVIDER_GOOGLE}
     >
       {isDirectionsVisible ? (
@@ -51,7 +51,7 @@ function MapDirections({ locations }) {
       origin={origin}
       waypoints={waypoints}
       destination={destination}
-      apikey={CONSTANTS.GOOGLE_PLACES_API_KEY}
+      apikey={CONSTANTS.GOOGLE_API_KEY}
       // optimizeWaypoints={true}
       onReady={({ distance, duration }) => {
         console.log(`Distance: ${distance} km`)

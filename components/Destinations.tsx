@@ -7,6 +7,7 @@ import { styles } from '../styles/HomeScreenStyle'
 export default function Destinations({
   locations,
   setLocations,
+  setMapRegion,
   setIsDirectionsVisible
 }) {
   const needsMoreLocations =
@@ -40,6 +41,7 @@ export default function Destinations({
             index={index}
             existingLocations={locations}
             setLocations={setLocations}
+            setMapRegion={setMapRegion}
           />
         )}
       />
@@ -49,6 +51,7 @@ export default function Destinations({
 
 function DestinationListItem({
   existingLocations,
+  setMapRegion,
   setLocations,
   location,
   index
@@ -59,7 +62,13 @@ function DestinationListItem({
         existingLocation.key !== locationKey
     )
 
+    const lastLocation =
+      newlocations.length < 1
+        ? CONSTANTS.AUCKLAND_MAP_REGION
+        : newlocations[newlocations.length - 1].coordinates
+
     setLocations(newlocations)
+    setMapRegion(lastLocation)
   }
 
   return (
