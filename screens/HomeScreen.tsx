@@ -21,13 +21,6 @@ export default function HomeScreen() {
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
 
-  const [
-    isSearchResultsVisible,
-    setIsSearchResultsVisible
-  ] = useState(false)
-
-  console.log('search results:', isSearchResultsVisible)
-
   return (
     <View style={styles.container}>
       <Map
@@ -39,27 +32,20 @@ export default function HomeScreen() {
         locations={locations}
         setLocations={setLocations}
         setMapRegion={setMapRegion}
-        setIsSearchResultsVisible={
-          setIsSearchResultsVisible
-        }
       />
-
-      {!isSearchResultsVisible ? (
-        isDirectionsVisible ? (
-          <Directions
-            locations={locations}
-            setIsDirectionsVisible={setIsDirectionsVisible}
-          />
-        ) : (
-          <Destinations
-            locations={locations}
-            setLocations={setLocations}
-            setMapRegion={setMapRegion}
-            setIsDirectionsVisible={setIsDirectionsVisible}
-          />
-        )
-      ) : null}
-
+      {isDirectionsVisible ? (
+        <Directions
+          locations={locations}
+          setIsDirectionsVisible={setIsDirectionsVisible}
+        />
+      ) : (
+        <Destinations
+          locations={locations}
+          setLocations={setLocations}
+          setMapRegion={setMapRegion}
+          setIsDirectionsVisible={setIsDirectionsVisible}
+        />
+      )}
       <ExpoStatusBar style="auto" />
     </View>
   )
