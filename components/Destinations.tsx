@@ -8,8 +8,11 @@ import {
 } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 
-import CONSTANTS from '../variables/constants'
+import constants from '../variables/constants'
 import { styles } from '../styles/Destinations'
+
+const { LOCATIONS_LIMIT_MIN, AUCKLAND_MAP_REGION } =
+  constants
 
 export default function Destinations({
   locations,
@@ -18,7 +21,7 @@ export default function Destinations({
   setIsDirectionsVisible
 }: any) {
   const notEnoughLocations =
-    locations.length < CONSTANTS.LOCATIONS_LIMIT_MIN
+    locations.length < LOCATIONS_LIMIT_MIN
 
   const showDirections = () =>
     notEnoughLocations
@@ -66,7 +69,7 @@ function DestinationListItem({
 
     const lastLocation =
       newlocations.length < 1
-        ? CONSTANTS.AUCKLAND_MAP_REGION
+        ? AUCKLAND_MAP_REGION
         : newlocations[newlocations.length - 1].coordinates
 
     setLocations(newlocations)
@@ -108,7 +111,7 @@ function DestinationListItem({
 function triggerAlert() {
   Alert.alert(
     'Hello',
-    `'You need at least ${CONSTANTS.LOCATIONS_LIMIT_MIN} locations, please add another location'`,
+    `'You need at least ${LOCATIONS_LIMIT_MIN} locations, please add another location'`,
     [{ text: 'OK' }]
   )
 }

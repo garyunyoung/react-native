@@ -5,8 +5,10 @@ import MapView, {
 } from 'react-native-maps'
 import MapViewDirections from 'react-native-maps-directions'
 
-import CONSTANTS from '../variables/constants'
+import constants from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
+
+const { GOOGLE_API_KEY } = constants
 
 export default function Map({
   locations,
@@ -47,7 +49,7 @@ function MapDirections({ locations }: any) {
       origin={origin}
       waypoints={waypoints}
       destination={origin}
-      apikey={CONSTANTS.GOOGLE_API_KEY}
+      apikey={GOOGLE_API_KEY}
       // optimizeWaypoints={true}
       onReady={({ distance, duration }) => {
         console.log(`Distance: ${distance} km`)

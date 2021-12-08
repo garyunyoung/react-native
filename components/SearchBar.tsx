@@ -2,8 +2,15 @@ import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { SafeAreaView, View, Alert } from 'react-native'
 
-import CONSTANTS from '../variables/constants'
+import constants from '../variables/constants'
 import { styles } from '../styles/HomeScreenStyle'
+
+const {
+  GOOGLE_API_KEY,
+  LOCATIONS_LIMIT_MAX,
+  LATITUDE_DELTA,
+  LONGITUDE_DELTA
+} = constants
 
 export default function SearchBar({
   locations,
@@ -12,7 +19,7 @@ export default function SearchBar({
 }: any) {
   function addNewLocation(newLocation: any) {
     const locationLimitReached =
-      locations.length >= CONSTANTS.LOCATIONS_LIMIT_MAX
+      locations.length >= LOCATIONS_LIMIT_MAX
 
     const locationAlreadyExists = locations.some(
       (location: any) => location.key === newLocation.key
@@ -22,7 +29,7 @@ export default function SearchBar({
       Alert.alert(
         'Hello',
         'The current location limit is ' +
-          CONSTANTS.LOCATIONS_LIMIT_MAX,
+          LOCATIONS_LIMIT_MAX,
         [{ text: 'OK' }]
       )
     } else if (locationAlreadyExists) {
@@ -60,16 +67,16 @@ export default function SearchBar({
       coordinates: {
         latitude: details?.geometry.location.lat,
         longitude: details?.geometry.location.lng,
-        latitudeDelta: CONSTANTS.LATITUDE_DELTA,
-        longitudeDelta: CONSTANTS.LONGITUDE_DELTA
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
       }
     }
 
     const newMapRegion = {
       latitude: details?.geometry.location.lat,
       longitude: details?.geometry.location.lng,
-      latitudeDelta: CONSTANTS.LATITUDE_DELTA,
-      longitudeDelta: CONSTANTS.LONGITUDE_DELTA
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA
     }
 
     setMapRegion(newMapRegion)
@@ -86,7 +93,7 @@ export default function SearchBar({
             handleOnPress(details)
           }
           query={{
-            key: CONSTANTS.GOOGLE_API_KEY,
+            key: GOOGLE_API_KEY,
             language: 'en',
             components: 'country:nz'
           }}
