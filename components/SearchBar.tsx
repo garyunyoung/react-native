@@ -94,7 +94,12 @@ export default function SearchBar({
           handleSearchResultOnPress(data, details)
         }
         renderRow={(data) => (
-          <SearchResultRow data={data} />
+          <SearchResultRow
+            mainText={data.structured_formatting.main_text}
+            secondaryText={
+              data.structured_formatting.secondary_text
+            }
+          />
         )}
         renderLeftButton={() => (
           <SearchLeftButton
@@ -110,10 +115,7 @@ export default function SearchBar({
   )
 }
 
-function SearchResultRow({ data }: any) {
-  const { main_text, secondary_text } =
-    data.structured_formatting
-
+function SearchResultRow({ mainText, secondaryText }: any) {
   return (
     <View style={styles.searchResultListItem}>
       <TouchableOpacity
@@ -130,13 +132,13 @@ function SearchResultRow({ data }: any) {
           style={styles.searchResultListItemMainText}
           numberOfLines={1}
         >
-          {main_text}
+          {mainText}
         </Text>
         <Text
           style={styles.searchResultListItemSecondaryText}
           numberOfLines={1}
         >
-          {secondary_text}
+          {secondaryText}
         </Text>
       </View>
     </View>
