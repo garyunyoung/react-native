@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar'
 import Destinations from '../components/Destinations'
 import Directions from '../components/Directions'
 
-import { AUCKLAND_MAP_REGION } from '../variables/constants'
+import { AUCKLAND_MAP_REGION } from '../constants/constants'
 import { styles } from '../styles/HomeScreenStyle'
 
 export default function HomeScreen() {

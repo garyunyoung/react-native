@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { COLOURS } from '../variables/theme'
+import { colours } from '../constants/theme'
 
 export const styles = StyleSheet.create({
   destinations: {
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    backgroundColor: COLOURS.errorRed,
+    backgroundColor: colours.errorRed,
 
     paddingHorizontal: 24
   },

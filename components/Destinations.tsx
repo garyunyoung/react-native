@@ -1,18 +1,20 @@
 import React from 'react'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
 import {
+  StyleSheet,
   View,
   Text,
   FlatList,
   Alert,
   TouchableOpacity
 } from 'react-native'
-import Swipeable from 'react-native-gesture-handler/Swipeable'
 
 import {
   LOCATIONS_LIMIT_MIN,
   AUCKLAND_MAP_REGION
-} from '../variables/constants'
+} from '../constants/constants'
 
+import { colours } from '../constants/theme'
 import { styles } from '../styles/Destinations'
 
 export default function Destinations({

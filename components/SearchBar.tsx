@@ -8,7 +8,8 @@ import {
   Text,
   Alert,
   TouchableOpacity,
-  Keyboard
+  Keyboard,
+  Platform
 } from 'react-native'
 
 import {
@@ -16,7 +17,7 @@ import {
   LOCATIONS_LIMIT_MAX,
   LATITUDE_DELTA,
   LONGITUDE_DELTA
-} from '../variables/constants'
+} from '../constants/constants'
 
 import {
   styles,

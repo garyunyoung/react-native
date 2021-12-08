@@ -4,8 +4,8 @@ import {
   StatusBar
 } from 'react-native'
 
-import { ANDROID } from '../variables/constants'
-import { height, width, COLOURS } from '../variables/theme'
+import { ANDROID } from '../constants/constants'
+import { sizes, colours } from '../constants/theme'
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,12 +18,12 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top:
       Platform.OS === ANDROID ? StatusBar.currentHeight : 0,
-    width: width
+    width: sizes.width
   },
 
   map: {
-    height: height * 0.5,
-    width: width
+    height: sizes.height * 0.5,
+    width: sizes.width
   },
 
   heading: {
@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
 
-    backgroundColor: COLOURS.selectBlue,
+    backgroundColor: colours.selectBlue,
     borderRadius: 100,
 
     marginRight: 16
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
   },
 
   searchResultListItemTextContainer: {
-    maxWidth: width - 100
+    maxWidth: sizes.width - 100
   },
 
   searchResultListItemMainText: {
@@ -140,7 +140,7 @@ export const searchResultStyles = {
   },
 
   listView: {
-    width: width,
+    width: sizes.width,
     backgroundColor: 'white'
   }
 }
