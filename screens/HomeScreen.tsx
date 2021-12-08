@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
-import { View } from 'react-native'
+import { View, Keyboard } from 'react-native'
 
 import Map from '../components/Map'
 import SearchBar from '../components/SearchBar'
@@ -21,6 +21,26 @@ export default function HomeScreen() {
 
   const [isKeyboardVisible, setIsKeyboardVisible] =
     useState(false)
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setIsKeyboardVisible(true)
+      }
+    )
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setIsKeyboardVisible(false)
+      }
+    )
+
+    return () => {
+      keyboardDidHideListener.remove()
+      keyboardDidShowListener.remove()
+    }
+  }, [])
 
   return (
     <View style={styles.container}>

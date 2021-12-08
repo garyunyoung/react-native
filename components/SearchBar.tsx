@@ -75,26 +75,6 @@ export default function SearchBar({
     }
   }
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setIsKeyboardVisible(true)
-      }
-    )
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setIsKeyboardVisible(false)
-      }
-    )
-
-    return () => {
-      keyboardDidHideListener.remove()
-      keyboardDidShowListener.remove()
-    }
-  }, [])
-
   const dismissKeyboard = () => {
     Keyboard.dismiss()
     setIsKeyboardVisible(false)
@@ -104,53 +84,29 @@ export default function SearchBar({
     <SafeAreaView style={styles.header}>
       <GooglePlacesAutocomplete
         placeholder="Search"
-        fetchDetails={true}
-        onPress={(data, details = null) =>
-          handleSearchResultOnPress(data, details)
-        }
         query={{
           key: GOOGLE_API_KEY,
           language: 'en',
           components: 'country:nz'
         }}
-        enablePoweredByContainer={false}
+        fetchDetails={true}
+        onPress={(data, details = null) =>
+          handleSearchResultOnPress(data, details)
+        }
         renderRow={(data) => (
           <SearchResultRow data={data} />
         )}
         renderLeftButton={() => (
-          <SearchInputIcon
+          <SearchLeftButton
             isKeyboardVisible={isKeyboardVisible}
             dismissKeyboard={dismissKeyboard}
           />
         )}
         suppressDefaultStyles={true}
+        enablePoweredByContainer={false}
         styles={searchResultStyles}
       />
     </SafeAreaView>
-  )
-}
-
-function SearchInputIcon({
-  isKeyboardVisible,
-  dismissKeyboard
-}: any) {
-  return isKeyboardVisible ? (
-    <View style={styles.searchInputLeftButton}>
-      <Ionicons
-        name="md-chevron-back"
-        size={32}
-        color="black"
-        onPress={dismissKeyboard}
-      />
-    </View>
-  ) : (
-    <View style={styles.searchInputLeftButton}>
-      <Ionicons
-        name="md-search-outline"
-        size={24}
-        color="gray"
-      />
-    </View>
   )
 }
 
@@ -183,6 +139,30 @@ function SearchResultRow({ data }: any) {
           {secondary_text}
         </Text>
       </View>
+    </View>
+  )
+}
+
+function SearchLeftButton({
+  isKeyboardVisible,
+  dismissKeyboard
+}: any) {
+  return isKeyboardVisible ? (
+    <View style={styles.searchInputLeftButton}>
+      <Ionicons
+        name="md-chevron-back"
+        size={32}
+        color="black"
+        onPress={dismissKeyboard}
+      />
+    </View>
+  ) : (
+    <View style={styles.searchInputLeftButton}>
+      <Ionicons
+        name="md-search-outline"
+        size={24}
+        color="gray"
+      />
     </View>
   )
 }
