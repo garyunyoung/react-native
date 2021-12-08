@@ -4,7 +4,8 @@ import {
   SafeAreaView,
   View,
   Text,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native'
 
 import constants from '../variables/constants'
@@ -102,9 +103,7 @@ export default function SearchBar({
             language: 'en',
             components: 'country:nz'
           }}
-          renderRow={(details) =>
-            renderSearchResultRow(details)
-          }
+          renderRow={(data) => renderSearchResultRow(data)}
         />
       </View>
     </SafeAreaView>
@@ -122,18 +121,26 @@ function getAddressComponentValue(
   }
 }
 
-function renderSearchResultRow(details: any) {
+function renderSearchResultRow(data: any) {
   const { main_text, secondary_text } =
-    details.structured_formatting
+    data.structured_formatting
 
   return (
     <View style={styles.searchResultListItem}>
-      <Text style={styles.searchResultListItemAdd}>+</Text>
+      <TouchableOpacity
+        style={styles.searchResultListItemAdd}
+      >
+        <Text style={styles.searchResultListItemAddText}>
+          +
+        </Text>
+      </TouchableOpacity>
       <View>
-        <Text style={styles.searchResultListItemText}>
+        <Text style={styles.searchResultListItemMainText}>
           {main_text}
         </Text>
-        <Text style={styles.searchResultListItemText}>
+        <Text
+          style={styles.searchResultListItemSecondaryText}
+        >
           {secondary_text}
         </Text>
       </View>

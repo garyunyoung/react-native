@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 
 import CONSTANTS from '../variables/constants'
-import { height, width } from '../variables/theme'
+import { height, width, COLOURS } from '../variables/theme'
 
 export const styles = StyleSheet.create({
   container: {
@@ -82,13 +82,38 @@ export const styles = StyleSheet.create({
 
   searchResultListItem: {
     flexDirection: 'row',
-    paddingVertical: 8
+    alignItems: 'center',
+
+    backgroundColor: 'white'
   },
+
   searchResultListItemAdd: {
-    fontSize: 20,
-    paddingRight: 24
+    width: 44,
+    height: 44,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    backgroundColor: COLOURS.selectBlue,
+    borderRadius: 100,
+
+    marginRight: 16
   },
-  searchResultListItemText: {
-    fontSize: 16
+
+  searchResultListItemAddText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+
+  searchResultListItemMainText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 2
+  },
+
+  searchResultListItemSecondaryText: {
+    fontSize: 14,
+    color: 'gray'
   }
 })
