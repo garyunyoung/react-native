@@ -15,6 +15,7 @@ export default function HomeScreen() {
   const [mapRegion, setMapRegion] = useState(
     DEFAULT_MAP_REGION
   )
+  const [optimalRoute, setOptimalRoute] = useState([])
 
   const [isDirectionsVisible, setIsDirectionsVisible] =
     useState(false)
@@ -47,12 +48,13 @@ export default function HomeScreen() {
       <Map
         locations={locations}
         mapRegion={mapRegion}
+        setOptimalRoute={setOptimalRoute}
         isDirectionsVisible={isDirectionsVisible}
       />
 
       {isDirectionsVisible ? (
         <Directions
-          locations={locations}
+          locations={optimalRoute}
           setIsDirectionsVisible={setIsDirectionsVisible}
         />
       ) : (

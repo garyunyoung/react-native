@@ -11,6 +11,7 @@ import { styles } from '../styles/MapStyle'
 export default function Map({
   locations,
   mapRegion,
+  setOptimalRoute,
   isDirectionsVisible
 }: any) {
   return (
@@ -20,7 +21,10 @@ export default function Map({
       provider={PROVIDER_GOOGLE}
     >
       {isDirectionsVisible ? (
-        <MapDirections locations={locations} />
+        <MapDirections
+          locations={locations}
+          setOptimalRoute={setOptimalRoute}
+        />
       ) : null}
 
       {locations.map((location: any, index: number) => (
@@ -34,7 +38,10 @@ export default function Map({
   )
 }
 
-function MapDirections({ locations }: any) {
+function MapDirections({
+  locations,
+  setOptimalRoute
+}: any) {
   const coordinates = locations.map(
     (location: any) => location.coordinates
   )
@@ -42,19 +49,29 @@ function MapDirections({ locations }: any) {
   const origin = coordinates[0]
   const waypoints = coordinates.slice(1)
 
+  function setWaypoints(waypointOrder: number[][]) {
+    let result = [locations[0]]
+
+    for (let wayPoint of waypointOrder[0]) {
+      result.push(locations[wayPoint + 1])
+    }
+
+    setOptimalRoute(result)
+  }
+
   return (
     <MapViewDirections
       origin={origin}
       waypoints={waypoints}
       destination={origin}
       apikey={GOOGLE_API_KEY}
-      // optimizeWaypoints={true}
-      onReady={({ distance, duration }) => {
-        console.log(`Distance: ${distance} km`)
-        console.log(`Duration: ${duration} min.`)
-        // console.log(`Waypoint: ${result.waypointOrder}.`)
+      optimizeWaypoints={true}
+      onReady={({ waypointOrder }) => {
+        setWaypoints(waypointOrder)
       }}
       lineDashPattern={[0]}
+      strokeWidth={2}
+      strokeColor="black"
     />
   )
 }
