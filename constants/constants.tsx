@@ -1,6 +1,6 @@
-import { GOOGLE_API_KEY } from '@env'
+import { GOOGLE_MAPS_API_KEY } from '@env'
 
-export const API_KEY = GOOGLE_API_KEY
+export const API_KEY = GOOGLE_MAPS_API_KEY
 export const ANDROID = 'android'
 export const LOCATIONS_MAX = 5
 export const LOCATIONS_MIN = 2
