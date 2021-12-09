@@ -75,5 +75,28 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 8,
     marginRight: 24
+  },
+
+  directionsButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+
+    backgroundColor: colours.selectBlue,
+    borderRadius: 100,
+
+    shadowColor: colours.shadowGrey,
+    shadowOffset: { width: -2, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
+
+    paddingVertical: 8,
+    paddingHorizontal: 16
+  },
+
+  directionsButtonText: {
+    fontSize: 14,
+    color: 'white',
+    marginLeft: 8
   }
 })

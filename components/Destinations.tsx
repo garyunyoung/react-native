@@ -1,4 +1,5 @@
 import React from 'react'
+import { Ionicons } from '@expo/vector-icons'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import {
   View,
@@ -31,9 +32,20 @@ export default function Destinations(props: any) {
     <View style={styles.container}>
       <View style={styles.headingContainer}>
         <Text style={styles.headingText}>Destinations</Text>
-        <Text onPress={() => showDirections()}>
-          show directions
-        </Text>
+        <TouchableOpacity
+          style={styles.directionsButton}
+          onPress={() => showDirections()}
+        >
+          <Ionicons
+            onPress={props.dismissKeyboard}
+            name="car"
+            size={30}
+            color="white"
+          />
+          <Text style={styles.directionsButtonText}>
+            Directions
+          </Text>
+        </TouchableOpacity>
       </View>
       <FlatList
         data={props.locations}

@@ -10,7 +10,8 @@ const sizes = {
 
 const colours = {
   errorRed: '#e80e0f',
-  selectBlue: '#84c9e8'
+  selectBlue: '#84c9e8',
+  shadowGrey: '#171717'
 }
 
 const fonts = {
