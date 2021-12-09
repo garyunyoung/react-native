@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
-import { StyleSheet, View, Keyboard } from 'react-native'
+import { View, Keyboard } from 'react-native'
 
 import Map from '../components/Map'
 import SearchBar from '../components/SearchBar'
@@ -49,13 +49,6 @@ export default function HomeScreen() {
         mapRegion={mapRegion}
         isDirectionsVisible={isDirectionsVisible}
       />
-      <SearchBar
-        locations={locations}
-        setLocations={setLocations}
-        setMapRegion={setMapRegion}
-        isKeyboardVisible={isKeyboardVisible}
-        setIsKeyboardVisible={setIsKeyboardVisible}
-      />
 
       {isDirectionsVisible ? (
         <Directions
@@ -71,6 +64,13 @@ export default function HomeScreen() {
         />
       )}
 
+      <SearchBar
+        locations={locations}
+        setLocations={setLocations}
+        setMapRegion={setMapRegion}
+        isKeyboardVisible={isKeyboardVisible}
+        setIsKeyboardVisible={setIsKeyboardVisible}
+      />
       <ExpoStatusBar style="dark" />
     </View>
   )

@@ -67,7 +67,13 @@ export default function SearchBar(props: any) {
   }
 
   return (
-    <SafeAreaView style={styles.header}>
+    <SafeAreaView
+      style={
+        props.isKeyboardVisible
+          ? styles.headerSelected
+          : styles.header
+      }
+    >
       <GooglePlacesAutocomplete
         placeholder="Search"
         query={{

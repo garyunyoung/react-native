@@ -15,6 +15,16 @@ const styles = StyleSheet.create({
     width: sizes.width
   },
 
+  headerSelected: {
+    position: 'absolute',
+    top:
+      Platform.OS === ANDROID ? StatusBar.currentHeight : 0,
+    width: sizes.width,
+
+    height: sizes.height,
+    backgroundColor: 'white'
+  },
+
   listItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -69,27 +79,20 @@ const googlePlacesAutocomplete = {
   textInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-
     backgroundColor: 'white',
-
     borderRadius: 40,
     borderWidth: 0.5,
     borderColor: 'lightgray',
-
+    paddingRight: 8,
     marginHorizontal: 16
   },
 
   textInput: {
+    flex: 1,
+    justifyContent: 'flex-start',
     fontSize: 16,
-    width:
-      sizes.width -
-      (sizes.paddingHorizontalEdge * 2 + sizes.button + 8),
-    paddingVertical: 16
-  },
-
-  listView: {
-    width: sizes.width,
-    backgroundColor: 'white'
+    paddingVertical: 16,
+    paddingRight: 8
   }
 }
 
