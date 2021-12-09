@@ -1,6 +1,7 @@
+import { GOOGLE_API_KEY } from '@env'
+
+export const API_KEY = GOOGLE_API_KEY
 export const ANDROID = 'android'
-export const GOOGLE_API_KEY =
-  'AIzaSyArTD2oId5AfnDoHd9CR0KQbH4utjGZcE8'
 export const LOCATIONS_MAX = 5
 export const LOCATIONS_MIN = 2
 export const LATITUDE_DELTA = 0.0922

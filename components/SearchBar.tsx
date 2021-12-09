@@ -7,7 +7,7 @@ import triggerAlert from './Alert'
 import SearchResult from './SearchResult'
 
 import {
-  GOOGLE_API_KEY,
+  API_KEY,
   LOCATIONS_MAX,
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
@@ -77,7 +77,7 @@ export default function SearchBar(props: any) {
       <GooglePlacesAutocomplete
         placeholder="Search"
         query={{
-          key: GOOGLE_API_KEY,
+          key: API_KEY,
           language: SEARCH_RESULTS_LANGUAGE,
           components: SEARCH_RESULTS_REGION
         }}

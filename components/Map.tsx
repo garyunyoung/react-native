@@ -5,7 +5,7 @@ import MapView, {
   Marker
 } from 'react-native-maps'
 
-import { GOOGLE_API_KEY } from '../constants/constants'
+import { API_KEY } from '../constants/constants'
 import { styles } from '../styles/MapStyle'
 
 export default function Map({
@@ -64,7 +64,7 @@ function MapDirections({
       origin={origin}
       waypoints={waypoints}
       destination={origin}
-      apikey={GOOGLE_API_KEY}
+      apikey={API_KEY}
       optimizeWaypoints={true}
       onReady={({ waypointOrder }) => {
         setWaypoints(waypointOrder)
