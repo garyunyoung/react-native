@@ -79,10 +79,16 @@ const googlePlacesAutocomplete = {
   textInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
+
     borderRadius: 40,
-    borderWidth: 0.5,
-    borderColor: 'lightgray',
+    backgroundColor: 'white',
+
+    shadowColor: colours.shadowGrey,
+    shadowOffset: { width: -2, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
+
     paddingRight: 8,
     marginHorizontal: 16
   },
@@ -90,7 +96,9 @@ const googlePlacesAutocomplete = {
   textInput: {
     flex: 1,
     justifyContent: 'flex-start',
+
     fontSize: 16,
+
     paddingVertical: 16,
     paddingRight: 8
   }

@@ -56,21 +56,23 @@ export default function HomeScreen() {
           setIsDirectionsVisible={setIsDirectionsVisible}
         />
       ) : (
-        <Destinations
-          locations={locations}
-          setLocations={setLocations}
-          setMapRegion={setMapRegion}
-          setIsDirectionsVisible={setIsDirectionsVisible}
-        />
+        <React.Fragment>
+          <Destinations
+            locations={locations}
+            setLocations={setLocations}
+            setMapRegion={setMapRegion}
+            setIsDirectionsVisible={setIsDirectionsVisible}
+          />
+          <SearchBar
+            locations={locations}
+            setLocations={setLocations}
+            setMapRegion={setMapRegion}
+            isKeyboardVisible={isKeyboardVisible}
+            setIsKeyboardVisible={setIsKeyboardVisible}
+          />
+        </React.Fragment>
       )}
 
-      <SearchBar
-        locations={locations}
-        setLocations={setLocations}
-        setMapRegion={setMapRegion}
-        isKeyboardVisible={isKeyboardVisible}
-        setIsKeyboardVisible={setIsKeyboardVisible}
-      />
       <ExpoStatusBar style="dark" />
     </View>
   )
