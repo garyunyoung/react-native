@@ -22,7 +22,7 @@ export default function Destinations(props: any) {
     props.locations.length < LOCATIONS_MIN
       ? triggerAlert(
           'Hello',
-          `'You need at least ${LOCATIONS_MIN}, locations, please add another location'`,
+          `'You need at least ${LOCATIONS_MIN} locations, please add another location'`,
           'OK'
         )
       : props.setIsDirectionsVisible(true)
