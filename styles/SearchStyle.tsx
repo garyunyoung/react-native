@@ -40,14 +40,10 @@ const styles = StyleSheet.create({
 
     backgroundColor: colours.selectBlue,
     borderRadius: 100,
+    borderWidth: 0.5,
+    borderColor: 'lightgray',
 
     marginRight: 16
-  },
-
-  addButtonText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white'
   },
 
   listItemTextContainer: {
