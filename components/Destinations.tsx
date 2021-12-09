@@ -36,12 +36,7 @@ export default function Destinations(props: any) {
           style={styles.directionsButton}
           onPress={() => showDirections()}
         >
-          <Ionicons
-            onPress={props.dismissKeyboard}
-            name="car"
-            size={30}
-            color="white"
-          />
+          <Ionicons name="car" size={30} color="white" />
           <Text style={styles.directionsButtonText}>
             Directions
           </Text>

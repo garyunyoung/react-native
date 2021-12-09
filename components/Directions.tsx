@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity
+} from 'react-native'
 import { styles } from '../styles/SharedStyle'
 
 export default function Directions({
@@ -10,13 +16,21 @@ export default function Directions({
     <View style={styles.container}>
       <View style={styles.headingContainer}>
         <Text style={styles.headingText}>Directions</Text>
-        <Text
+        <TouchableOpacity
+          style={styles.directionsButton}
           onPress={() => {
             setIsDirectionsVisible(false)
           }}
         >
-          back to destinations
-        </Text>
+          <Ionicons
+            name="arrow-back"
+            size={30}
+            color="white"
+          />
+          <Text style={styles.directionsButtonText}>
+            Back
+          </Text>
+        </TouchableOpacity>
       </View>
       <FlatList
         data={locations}
