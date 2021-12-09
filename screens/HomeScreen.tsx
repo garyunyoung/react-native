@@ -3,7 +3,6 @@ import { StatusBar as ExpoStatusBar } from 'expo-status-bar'
 import { View, Keyboard } from 'react-native'
 
 import Map from '../components/Map'
-import Geolocation from '../components/Geolocation'
 import SearchBar from '../components/SearchBar'
 import Destinations from '../components/Destinations'
 import Directions from '../components/Directions'
@@ -53,9 +52,6 @@ export default function HomeScreen() {
           setOptimalRoute={setOptimalRoute}
           isDirectionsVisible={isDirectionsVisible}
         />
-        {isDirectionsVisible || isKeyboardVisible ? null : (
-          <Geolocation />
-        )}
       </View>
 
       {isDirectionsVisible ? (
